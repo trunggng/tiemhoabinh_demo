@@ -76,8 +76,13 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            height: 350px;
+            height: 300px; /* Adjusted for mobile */
             max-height: 450px;
+        }
+        @media (min-width: 640px) {
+            .chart-container {
+                height: 350px;
+            }
         }
        .btn-primary {
             background-color: #DC143C;
@@ -114,9 +119,9 @@
 <body class="antialiased">
 
     <header id="header" class="bg-white/90 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-md">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <a href="#hero" class="text-3xl font-bold text-crimson tracking-wider">HB</a>
-            <nav class="hidden md:flex items-center space-x-6 lg:space-x-8">
+            <nav class="hidden md:flex items-center space-x-4 lg:space-x-6">
                 <a href="#gallery" class="nav-link text-gray-700 hover:text-crimson">Thư Viện</a>
                 <a href="#vision" class="nav-link text-gray-700 hover:text-crimson">Tầm Nhìn</a>
                 <a href="#inspiration" class="nav-link text-gray-700 hover:text-crimson">Cảm Hứng</a>
@@ -125,8 +130,8 @@
                 <a href="#store-video" class="nav-link text-gray-700 hover:text-crimson">Video</a>
                 <a href="#market" class="nav-link text-gray-700 hover:text-crimson">Thị Trường</a>
                 <a href="#team" class="nav-link text-gray-700 hover:text-crimson">Đội Ngũ</a>
-                <div id="auth-links" class="flex items-center space-x-4">
-                    <a href="#" id="login-btn" class="btn-primary px-4 py-2 rounded-md text-sm font-bold">Đăng Nhập</a>
+                <div id="auth-links" class="flex items-center space-x-4 pl-4">
+                    <a href="#" id="login-btn" class="btn-primary px-4 py-2 rounded-md text-sm font-bold whitespace-nowrap">Đăng Nhập</a>
                     <span id="welcome-msg" class="hidden text-gray-700 font-semibold"></span>
                     <a href="#" id="logout-btn" class="hidden text-gray-500 hover:text-crimson text-sm font-bold">Đăng Xuất</a>
                 </div>
@@ -144,7 +149,11 @@
             <a href="#store-video" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Video</a>
             <a href="#market" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Thị Trường</a>
             <a href="#team" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Đội Ngũ</a>
-            <a href="#" id="mobile-login-btn" class="block text-center py-3 text-gray-700 font-bold hover:bg-gray-100">Đăng Nhập</a>
+            <div id="mobile-auth-links" class="border-t border-gray-200 mt-2 pt-2">
+                <a href="#" id="mobile-login-btn" class="block text-center py-3 text-gray-700 font-bold hover:bg-gray-100">Đăng Nhập</a>
+                 <span id="mobile-welcome-msg" class="hidden text-center py-3 text-gray-700 font-semibold"></span>
+                 <a href="#" id="mobile-logout-btn" class="hidden block text-center py-3 text-gray-500 hover:bg-gray-100">Đăng Xuất</a>
+            </div>
         </div>
     </header>
 
@@ -153,16 +162,16 @@
             <div class="hero-video-container">
                 <iframe src="https://www.youtube.com/embed/SgZOUMC2VLE?autoplay=1&mute=1&loop=1&playlist=SgZOUMC2VLE&controls=0&showinfo=0&autohide=1&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
-            <div class="relative z-10 bg-black/40 p-10 rounded-xl">
-                <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">Chế Tác Bình Yên, <span class="text-gold">Khắc Ghi Dấu Ấn</span></h1>
-                <p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">Nơi mỗi thiết kế trang sức 3D là một câu chuyện riêng, một biểu tượng của sự hài hòa và vẻ đẹp vĩnh cửu.</p>
+            <div class="relative z-10 bg-black/40 p-6 sm:p-10 rounded-xl mx-4">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4">Chế Tác Bình Yên, <span class="text-gold">Khắc Ghi Dấu Ấn</span></h1>
+                <p class="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto">Nơi mỗi thiết kế trang sức 3D là một câu chuyện riêng, một biểu tượng của sự hài hòa và vẻ đẹp vĩnh cửu.</p>
             </div>
         </section>
 
-        <section id="gallery" class="py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Thư Viện Hình Ảnh</h2>
+        <section id="gallery" class="py-16 sm:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Thư Viện Hình Ảnh</h2>
                     <p class="text-lg text-gray-600 max-w-3xl mx-auto">Những khoảnh khắc được ghi lại từ không gian chế tác của chúng tôi, nơi nghệ thuật và công nghệ giao thoa.</p>
                 </div>
                 <div class="max-w-4xl mx-auto relative overflow-hidden rounded-lg shadow-xl" id="image-slider">
@@ -180,18 +189,18 @@
             </div>
         </section>
 
-        <section id="vision" class="py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-6 text-center max-w-4xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Tầm Nhìn <span class="text-crimson">Hòa Bình</span></h2>
+        <section id="vision" class="py-16 sm:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-4 sm:px-6 text-center max-w-4xl">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-6">Tầm Nhìn <span class="text-crimson">Hòa Bình</span></h2>
                 <p class="text-lg text-gray-600 mb-4 leading-relaxed">"Hòa Bình" không chỉ là một thương hiệu, mà là một hành trình tìm kiếm sự bình yên nội tại và sự hài hòa trong cuộc sống. Chúng tôi tin rằng trang sức không chỉ là vật trang trí, mà còn là một "điểm chạm" cá nhân, một biểu tượng mang ý nghĩa sâu sắc.</p>
                 <p class="text-lg text-gray-600 leading-relaxed">Sứ mệnh của chúng tôi là kết hợp công nghệ thiết kế 3D tiên tiến với tay nghề thủ công tinh xảo để tạo ra những món trang sức độc bản, giúp mỗi khách hàng thể hiện câu chuyện và giá trị của riêng mình.</p>
             </div>
         </section>
 
-        <section id="inspiration" class="py-24 section-fade-in">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Nguồn Cảm Hứng Bất Tận</h2>
+        <section id="inspiration" class="py-16 sm:py-24 section-fade-in">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Nguồn Cảm Hứng Bất Tận</h2>
                     <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Lấy cảm hứng từ sự đa dạng và sống động của Chợ Hòa Bình, mỗi biểu tượng mang một câu chuyện về hòa bình, tình yêu và sự cân bằng. Hãy khám phá nguồn cảm hứng cho thiết kế của bạn.</p>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center" id="symbol-grid">
@@ -199,10 +208,10 @@
             </div>
         </section>
 
-        <section id="sales" class="py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Khám Phá Bộ Sưu Tập</h2>
+        <section id="sales" class="py-16 sm:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Khám Phá Bộ Sưu Tập</h2>
                     <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Những thiết kế sẵn có, được chế tác tỉ mỉ, mang đậm dấu ấn của Hòa Bình. Mỗi tác phẩm là một câu chuyện đang chờ bạn khám phá.</p>
                 </div>
                 <div class="flex justify-center space-x-2 md:space-x-4 mb-12" id="product-filters">
@@ -211,15 +220,15 @@
                     <button class="filter-btn btn-secondary px-4 py-2 rounded-full text-sm md:text-base" data-filter="dây chuyền">Dây Chuyền</button>
                     <button class="filter-btn btn-secondary px-4 py-2 rounded-full text-sm md:text-base" data-filter="bông tai">Bông Tai</button>
                 </div>
-                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                 </div>
             </div>
         </section>
 
-        <section id="journey" class="py-24 section-fade-in">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Hành Trình Sáng Tạo Của Bạn</h2>
+        <section id="journey" class="py-16 sm:py-24 section-fade-in">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Hành Trình Sáng Tạo Của Bạn</h2>
                     <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Chúng tôi đồng hành cùng bạn qua từng bước, từ ý tưởng ban đầu đến tác phẩm hoàn thiện, đảm bảo mỗi chi tiết đều hoàn hảo.</p>
                 </div>
                 <div class="relative">
@@ -250,10 +259,10 @@
             </div>
         </section>
 
-        <section id="store-video" class="py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Video Giới Thiệu Tiệm</h2>
+        <section id="store-video" class="py-16 sm:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Video Giới Thiệu Tiệm</h2>
                     <p class="text-lg text-gray-600 max-w-3xl mx-auto">Cùng khám phá không gian và quy trình làm việc chuyên nghiệp tại Hòa Bình qua video giới thiệu của chúng tôi.</p>
                 </div>
                 <div class="max-w-4xl mx-auto rounded-lg overflow-hidden shadow-xl">
@@ -264,13 +273,13 @@
             </div>
         </section>
 
-        <section id="market" class="py-24 section-fade-in">
-            <div class="container mx-auto px-6">
+        <section id="market" class="py-16 sm:py-24 section-fade-in">
+            <div class="container mx-auto px-4 sm:px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Bối Cảnh Thị Trường</h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Bối Cảnh Thị Trường</h2>
                     <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Chúng tôi đặt mục tiêu vượt trội bằng cách kết hợp công nghệ, nghệ thuật và trải nghiệm khách hàng độc đáo. So sánh mục tiêu của Hòa Bình với các đối thủ cạnh tranh.</p>
                 </div>
-                <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-xl">
+                <div class="max-w-4xl mx-auto bg-white p-4 sm:p-6 rounded-lg shadow-xl">
                     <div class="flex justify-center items-center mb-6">
                         <label for="competitor-select" class="mr-4 font-semibold text-lg">So sánh với:</label>
                         <select id="competitor-select" class="p-2 border-2 border-gray-300 rounded-md bg-gray-50 focus:border-crimson focus:ring-0">
@@ -286,11 +295,11 @@
             </div>
         </section>
         
-        <section id="team" class="py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-6 text-center max-w-5xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Đội Ngũ Chuyên Gia</h2>
+        <section id="team" class="py-16 sm:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-4 sm:px-6 text-center max-w-5xl">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-6">Đội Ngũ Chuyên Gia</h2>
                 <p class="text-lg text-gray-600 mb-12 leading-relaxed">Đằng sau mỗi tác phẩm là đội ngũ tận tâm, những người mang kinh nghiệm và uy tín để biến ý tưởng của bạn thành hiện thực.</p>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
                     <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center">
                         <img src="https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/475141379_1591288251747981_7502564262505491645_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF757DMkw9jRbA2fRRcWG8xTpRlT-qaBP5OlGVP6poE_v3_sUEY8CR5osthleN_zz0XZ-QJyxtV-Z9ByuQxRHLL&_nc_ohc=b91uoBHS6nkQ7kNvwHEa_hd&_nc_oc=AdndjeyJL9y9WeuDm9n8-zurgtji4uSfXstK2qJA_fjyQ12EOhyK7IX9qy3kMEj04SWsSG_MHl7k-iJX_q3_fmWY&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=4C-aIIrXuFOag4yjYOIUZA&oh=00_AfR9YOAXrTUO5TGGYcE8hXyl0SuA6knN8MCFfqGCUP7maA&oe=6886DEDC" onerror="this.onerror=null;this.src='https://placehold.co/200x200/CCCCCC/FFFFFF?text=DQ';" alt="Duy Quang" class="rounded-full mx-auto mb-6 w-40 h-40 object-cover border-4 border-gold">
                         <h3 class="text-3xl font-bold text-gray-800 mb-2">DUY QUANG</h3>
@@ -308,9 +317,9 @@
     </main>
 
     <footer class="bg-teal text-white">
-        <div class="container mx-auto px-6 py-16">
+        <div class="container mx-auto px-4 sm:px-6 py-16">
             <div class="text-center mb-10">
-                <h2 class="text-4xl font-bold mb-4">Tham Gia Hành Trình Cùng Hòa Bình</h2>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Tham Gia Hành Trình Cùng Hòa Bình</h2>
                 <p class="text-gray-200 max-w-xl mx-auto">Đăng ký để nhận những thông tin mới nhất, nguồn cảm hứng thiết kế và các ưu đãi độc quyền.</p>
                 <form class="mt-8 flex flex-col sm:flex-row justify-center max-w-lg mx-auto">
                     <input type="email" placeholder="Địa chỉ email của bạn" class="w-full sm:w-auto flex-grow px-4 py-3 rounded-md sm:rounded-r-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-gold">
@@ -318,7 +327,7 @@
                 </form>
             </div>
             <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-300">&copy; 2018 - 2025 Hòa Bình. Mọi quyền được bảo lưu.</p>
+                <p class="text-gray-300 text-sm">&copy; 2018 - 2025 Hòa Bình. Mọi quyền được bảo lưu.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <a href="#" class="text-gray-300 hover:text-gold">Facebook</a>
                     <a href="#" class="text-gray-300 hover:text-gold">Instagram</a>
@@ -530,6 +539,8 @@
             const loginForm = document.getElementById('login-form');
             const welcomeMsg = document.getElementById('welcome-msg');
             const logoutBtn = document.getElementById('logout-btn');
+            const mobileWelcomeMsg = document.getElementById('mobile-welcome-msg');
+            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
             const loginMessage = document.getElementById('login-message');
 
             const openLoginModal = () => {
@@ -548,23 +559,43 @@
             closeModalBtn.addEventListener('click', closeLoginModal);
             loginModal.addEventListener('click', (e) => { if (e.target === loginModal) closeLoginModal(); });
 
+            const handleLoginSuccess = (username) => {
+                loginMessage.textContent = 'Đăng nhập thành công!';
+                loginMessage.classList.remove('text-red-500');
+                loginMessage.classList.add('text-green-500');
+                setTimeout(() => {
+                    closeLoginModal();
+                    // Desktop view
+                    loginBtn.classList.add('hidden');
+                    welcomeMsg.textContent = `Chào, ${username}`;
+                    welcomeMsg.classList.remove('hidden');
+                    logoutBtn.classList.remove('hidden');
+                    // Mobile view
+                    mobileLoginBtn.classList.add('hidden');
+                    mobileWelcomeMsg.textContent = `Chào, ${username}`;
+                    mobileWelcomeMsg.classList.remove('hidden');
+                    mobileLogoutBtn.classList.remove('hidden');
+                }, 1000);
+            }
+
+            const handleLogout = () => {
+                 // Desktop view
+                welcomeMsg.classList.add('hidden');
+                logoutBtn.classList.add('hidden');
+                loginBtn.classList.remove('hidden');
+                 // Mobile view
+                mobileWelcomeMsg.classList.add('hidden');
+                mobileLogoutBtn.classList.add('hidden');
+                mobileLoginBtn.classList.remove('hidden');
+            }
+
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
 
                 if (username === 'admin' && password === '123') {
-                    loginMessage.textContent = 'Đăng nhập thành công!';
-                    loginMessage.classList.remove('text-red-500');
-                    loginMessage.classList.add('text-green-500');
-                    setTimeout(() => {
-                        closeLoginModal();
-                        loginBtn.classList.add('hidden');
-                        mobileLoginBtn.classList.add('hidden');
-                        welcomeMsg.textContent = `Chào, ${username}`;
-                        welcomeMsg.classList.remove('hidden');
-                        logoutBtn.classList.remove('hidden');
-                    }, 1000);
+                    handleLoginSuccess(username);
                 } else {
                     loginMessage.textContent = 'Tên đăng nhập hoặc mật khẩu không đúng.';
                     loginMessage.classList.add('text-red-500');
@@ -572,13 +603,8 @@
                 }
             });
 
-            logoutBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                welcomeMsg.classList.add('hidden');
-                logoutBtn.classList.add('hidden');
-                loginBtn.classList.remove('hidden');
-                mobileLoginBtn.classList.remove('hidden');
-            });
+            logoutBtn.addEventListener('click', (e) => { e.preventDefault(); handleLogout(); });
+            mobileLogoutBtn.addEventListener('click', (e) => { e.preventDefault(); handleLogout(); });
         });
     </script>
 </body>
