@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO On-Page từ Kế hoạch -->
+    <title>Hòa Bình | Trang Sức Bạc Thủ Công An Yên tại Quận 5, TPHCM</title>
+    <meta name="description" content="Khám phá trang sức bạc thủ công Hòa Bình tại Quận 5, TPHCM. Mỗi thiết kế lấy cảm hứng từ thiên nhiên và sự an yên, mang đến vẻ đẹp tinh tế và vượt thời gian. Ghé thăm cửa hàng của chúng tôi tại 42 Chiêu Anh Các.">
+    <meta name="keywords" content="trang sức bạc quận 5, cửa hàng trang sức bạc tphcm, trang sức thủ công, nhẫn bạc, dây chuyền bạc, hòa bình jewelry">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>HB</text></svg>">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter (sans-serif) và Lora (serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+        @layer base {
+            html {
+                scroll-behavior: smooth;
+            }
+        }
+        @layer utilities {
+            .bg-hero-pattern {
+                background-image: url('https://placehold.co/1920x1080/005B41/F5F5DC?text=Hòa+Bình');
+                /* Đây là ảnh placeholder, sẽ được thay bằng ảnh thực tế chất lượng cao */
+            }
+        }
+        @layer theme {
+            extend {
+                colors: {
+                    'brand-cream': '#F5F5DC',
+                    'brand-emerald': '#005B41',
+                    'brand-sage': '#879A79',
+                    'brand-gold': '#D4AF37',
+                    'brand-dark': '#333333',
+                },
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    serif: ['Lora', 'serif'],
+                }
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-brand-cream text-brand-dark font-sans antialiased">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-brand-cream/80 backdrop-blur-lg sticky top-0 z-50 transition-all duration-300 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" class="text-2xl font-serif font-bold text-brand-emerald">
+                    Hòa Bình
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#collections" class="hover:text-brand-gold transition-colors duration-300">Bộ Sưu Tập</a>
+                    <a href="#story" class="hover:text-brand-gold transition-colors duration-300">Về Hòa Bình</a>
+                    <a href="#blog" class="hover:text-brand-gold transition-colors duration-300">Góc An Yên</a>
+                    <a href="#contact" class="hover:text-brand-gold transition-colors duration-300">Liên Hệ</a>
+                </nav>
+
+                <!-- Cart Icon -->
+                <div class="flex items-center">
+                     <a href="#" class="relative p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brand-dark hover:text-brand-gold transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-brand-gold"></span>
+                    </a>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="md:hidden ml-4 p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-cream/95">
+            <nav class="flex flex-col items-center space-y-4 py-4">
+                <a href="#collections" class="hover:text-brand-gold transition-colors duration-300">Bộ Sưu Tập</a>
+                <a href="#story" class="hover:text-brand-gold transition-colors duration-300">Về Hòa Bình</a>
+                <a href="#blog" class="hover:text-brand-gold transition-colors duration-300">Góc An Yên</a>
+                <a href="#contact" class="hover:text-brand-gold transition-colors duration-300">Liên Hệ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="h-screen min-h-[600px] bg-cover bg-center bg-fixed bg-hero-pattern flex items-center justify-center">
+            <div class="text-center text-white bg-black/30 p-8 rounded-lg">
+                <h1 class="text-5xl md:text-7xl font-serif font-semibold leading-tight mb-4">Tìm Về An Yên.</h1>
+                <p class="text-xl md:text-2xl font-light">Vẻ Đẹp Bất Tận.</p>
+                <a href="#collections" class="mt-8 inline-block bg-brand-gold text-brand-dark font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105">
+                    Khám Phá Ngay
+                </a>
+            </div>
+        </section>
+
+        <!-- Featured Collections -->
+        <section id="collections" class="py-16 md:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-serif text-brand-emerald mb-4">Các Bộ Sưu Tập Nổi Bật</h2>
+                <p class="text-brand-sage max-w-2xl mx-auto mb-12">Mỗi bộ sưu tập là một câu chuyện, một cảm hứng từ sự cân bằng tinh tế của thiên nhiên.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Collection Card 1 -->
+                    <div class="group overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <img src="https://placehold.co/600x800/879A79/FFFFFF?text=BST+Sương+Mai" alt="Bộ Sưu Tập Sương Mai" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/70 to-transparent text-white">
+                            <h3 class="text-2xl font-serif">Bộ Sưu Tập Sương Mai</h3>
+                        </div>
+                    </div>
+                    <!-- Collection Card 2 -->
+                    <div class="group overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <img src="https://placehold.co/600x800/005B41/FFFFFF?text=BST+Vườn+Thiền" alt="Bộ Sưu Tập Vườn Thiền" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/70 to-transparent text-white">
+                            <h3 class="text-2xl font-serif">Bộ Sưu Tập Vườn Thiền</h3>
+                        </div>
+                    </div>
+                    <!-- Collection Card 3 -->
+                    <div class="group overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <img src="https://placehold.co/600x800/D4AF37/FFFFFF?text=BST+Gió+Biển" alt="Bộ Sưu Tập Gió Biển" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/70 to-transparent text-white">
+                            <h3 class="text-2xl font-serif">Bộ Sưu Tập Gió Biển</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Story -->
+        <section id="story" class="py-16 md:py-24 bg-white/50">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/800x600/F5F5DC/879A79?text=Câu+Chuyện+Hòa+Bình" alt="Xưởng chế tác trang sức Hòa Bình" class="rounded-lg shadow-xl">
+                    </div>
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-serif text-brand-emerald mb-4">Câu Chuyện Của Chúng Tôi</h2>
+                        <p class="text-lg text-brand-dark leading-relaxed mb-6 font-serif italic">
+                            "Giữa lòng Sài Gòn náo nhiệt, Hòa Bình được khai sinh từ khát khao về những khoảnh khắc tĩnh lặng và vẻ đẹp an nhiên. Mỗi món trang sức bạc của chúng tôi không chỉ là một phụ kiện, mà là một lời nhắc nhở về sự bình yên..."
+                        </p>
+                        <p class="text-brand-sage mb-8">
+                            ...được chế tác thủ công với nguồn cảm hứng từ sự cân bằng tinh tế của thiên nhiên - một giọt sương mai trên lá, một đường vân trên đá cuội, hay một khu vườn thiền tĩnh lặng. Tại 42 Chiêu Anh Các, Quận 5, chúng tôi không chỉ tạo ra trang sức, chúng tôi tạo ra những mảnh ghép của sự bình yên để bạn mang theo mỗi ngày.
+                        </p>
+                        <a href="#" class="text-brand-gold font-bold hover:underline">Khám phá thêm</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Sellers -->
+        <section id="bestsellers" class="py-16 md:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-serif text-brand-emerald mb-4">Sản Phẩm Bán Chạy</h2>
+                <p class="text-brand-sage max-w-2xl mx-auto mb-12">Những thiết kế được yêu thích nhất, mang trong mình câu chuyện và vẻ đẹp của Hòa Bình.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Product Card 1 -->
+                    <div class="group text-left">
+                        <div class="overflow-hidden rounded-lg mb-4 relative">
+                            <img src="https://placehold.co/600x600/F5F5DC/879A79?text=Nhẫn+Lá+An+Nhiên" alt="Nhẫn Lá An Nhiên" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+                            <button class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-brand-gold text-brand-dark font-bold py-2 px-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">Thêm vào giỏ</button>
+                        </div>
+                        <h3 class="font-serif text-lg text-brand-emerald">Nhẫn Lá An Nhiên</h3>
+                        <p class="text-brand-dark font-semibold">750.000 VNĐ</p>
+                    </div>
+                     <!-- Product Card 2 -->
+                     <div class="group text-left">
+                        <div class="overflow-hidden rounded-lg mb-4 relative">
+                            <img src="https://placehold.co/600x600/F5F5DC/005B41?text=Dây+Chuyền+Sương+Mai" alt="Dây Chuyền Sương Mai" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+                            <button class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-brand-gold text-brand-dark font-bold py-2 px-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">Thêm vào giỏ</button>
+                        </div>
+                        <h3 class="font-serif text-lg text-brand-emerald">Dây Chuyền Sương Mai</h3>
+                        <p class="text-brand-dark font-semibold">1.200.000 VNĐ</p>
+                    </div>
+                     <!-- Product Card 3 -->
+                     <div class="group text-left">
+                        <div class="overflow-hidden rounded-lg mb-4 relative">
+                            <img src="https://placehold.co/600x600/F5F5DC/879A79?text=Bông+Tai+Vườn+Thiền" alt="Bông Tai Vườn Thiền" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+                             <button class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-brand-gold text-brand-dark font-bold py-2 px-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">Thêm vào giỏ</button>
+                        </div>
+                        <h3 class="font-serif text-lg text-brand-emerald">Bông Tai Vườn Thiền</h3>
+                        <p class="text-brand-dark font-semibold">980.000 VNĐ</p>
+                    </div>
+                     <!-- Product Card 4 -->
+                     <div class="group text-left">
+                        <div class="overflow-hidden rounded-lg mb-4 relative">
+                            <img src="https://placehold.co/600x600/F5F5DC/005B41?text=Lắc+Tay+Gió+Biển" alt="Lắc Tay Gió Biển" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+                             <button class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-brand-gold text-brand-dark font-bold py-2 px-6 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">Thêm vào giỏ</button>
+                        </div>
+                        <h3 class="font-serif text-lg text-brand-emerald">Lắc Tay Gió Biển</h3>
+                        <p class="text-brand-dark font-semibold">1.550.000 VNĐ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Physical Store Presence (Yếu tố tạo niềm tin) -->
+        <section id="contact" class="py-16 md:py-24 bg-brand-emerald text-brand-cream">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                     <div class="md:w-1/2 text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-serif mb-4">Ghé Thăm Cửa Hàng Của Chúng Tôi</h2>
+                        <p class="text-lg leading-relaxed mb-6 font-serif italic">
+                           Trải nghiệm không gian an yên và chiêm ngưỡng những tác phẩm thủ công tinh xảo.
+                        </p>
+                        <div class="space-y-4 mb-8 text-left max-w-md mx-auto md:mx-0">
+                            <div class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <span><strong class="font-semibold">Địa chỉ:</strong> 42 Chiêu Anh Các, Phường 5, Quận 5, TP.HCM</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                                <span><strong class="font-semibold">Hotline:</strong> 0909 123 456</span>
+                            </div>
+                        </div>
+                        <a href="#map-placeholder" class="mt-8 inline-block bg-brand-gold text-brand-dark font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105">
+                            Xem Bản Đồ
+                        </a>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/800x600/F5F5DC/005B41?text=Cửa+hàng+Hòa+Bình+Quận+5" alt="Mặt tiền cửa hàng Hòa Bình tại 42 Chiêu Anh Các" class="rounded-lg shadow-xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Blog Section -->
+        <section id="blog" class="py-16 md:py-24">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-serif text-brand-emerald mb-4">Góc An Yên</h2>
+                <p class="text-brand-sage max-w-2xl mx-auto mb-12">Nơi chia sẻ những câu chuyện, mẹo hay và cảm hứng để tìm thấy sự bình yên trong cuộc sống bộn bề.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <!-- Blog Post 1 -->
+                    <div class="group">
+                        <div class="overflow-hidden rounded-lg mb-4">
+                            <img src="https://placehold.co/800x600/879A79/FFFFFF?text=Blog+1" alt="5 Cách Phối Đồ Với Trang Sức Bạc" class="w-full h-auto object-cover transform group-hover:scale-110 transition-transform duration-300">
+                        </div>
+                        <h3 class="font-serif text-xl text-brand-emerald mb-2">5 Cách Phối Đồ Với Trang Sức Bạc Cho Cô Nàng Công Sở Sài Gòn</h3>
+                        <p class="text-brand-sage mb-4">Khám phá cách làm mới phong cách công sở của bạn với những món trang sức bạc tinh tế và thanh lịch...</p>
+                        <a href="#" class="text-brand-gold font-bold hover:underline">Đọc thêm</a>
+                    </div>
+                     <!-- Blog Post 2 -->
+                    <div class="group">
+                        <div class="overflow-hidden rounded-lg mb-4">
+                            <img src="https://placehold.co/800x600/005B41/FFFFFF?text=Blog+2" alt="Top 5 Quán Cafe Yên Tĩnh ở Quận 5" class="w-full h-auto object-cover transform group-hover:scale-110 transition-transform duration-300">
+                        </div>
+                        <h3 class="font-serif text-xl text-brand-emerald mb-2">Top 5 Quán Cafe Yên Tĩnh ở Quận 5 để Đeo Món Trang Sức Mới</h3>
+                        <p class="text-brand-sage mb-4">Tìm một góc nhỏ bình yên giữa lòng Sài Gòn để thư giãn và khoe món trang sức mới của bạn...</p>
+                        <a href="#" class="text-brand-gold font-bold hover:underline">Đọc thêm</a>
+                    </div>
+                     <!-- Blog Post 3 -->
+                    <div class="group">
+                        <div class="overflow-hidden rounded-lg mb-4">
+                            <img src="https://placehold.co/800x600/D4AF37/FFFFFF?text=Blog+3" alt="Hướng Dẫn Bảo Quản Trang Sức Bạc" class="w-full h-auto object-cover transform group-hover:scale-110 transition-transform duration-300">
+                        </div>
+                        <h3 class="font-serif text-xl text-brand-emerald mb-2">Bí Quyết Giữ Trang Sức Bạc Luôn Sáng Bóng Như Mới</h3>
+                        <p class="text-brand-sage mb-4">Những mẹo đơn giản tại nhà giúp bạn bảo quản những món trang sức bạc yêu thích luôn bền đẹp...</p>
+                        <a href="#" class="text-brand-gold font-bold hover:underline">Đọc thêm</a>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/70 text-brand-dark py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Column 1: Brand -->
+                <div>
+                    <h3 class="text-xl font-serif font-bold text-brand-emerald mb-4">Hòa Bình</h3>
+                    <p class="text-brand-sage">Trang sức bạc thủ công. <br> Những mảnh ghép của sự bình yên.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-brand-sage hover:text-brand-gold"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                        <a href="#" class="text-brand-sage hover:text-brand-gold"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.623c-2.403 0-2.73.01-3.688.053-1.002.046-1.62.193-2.185.39- .63.22-1.148.518-1.648 1.018-.5.5-.797 1.018-1.018 1.648-.197.565-.344 1.183-.39 2.185-.043.958-.053 1.285-.053 3.688s.01 2.73.053 3.688c.046 1.002.193 1.62.39 2.185.22.63.518 1.148 1.018 1.648.5.5 1.018.797 1.648 1.018.565.197 1.183.344 2.185.39.958.043 1.285.053 3.688.053s2.73-.01 3.688-.053c1.002-.046 1.62-.193 2.185-.39.63-.22 1.148-.518 1.648-1.018.5-.5.797-1.018 1.018-1.648.197-.565.344-1.183.39-2.185.043-.958.053-1.285.053-3.688s-.01-2.73-.053-3.688c-.046-1.002-.193-1.62-.39-2.185-.22-.63-.518-1.148-1.018-1.648-.5-.5-1.018-.797-1.648-1.018-.565-.197-1.183-.344-2.185-.39-.958-.043-1.285-.053-3.688-.053zM12 8.118c-2.147 0-3.882 1.735-3.882 3.882s1.735 3.882 3.882 3.882 3.882-1.735 3.882-3.882-1.735-3.882-3.882-3.882zm0 6.162c-1.258 0-2.28-1.022-2.28-2.28s1.022-2.28 2.28-2.28 2.28 1.022 2.28 2.28-1.022 2.28-2.28 2.28zm4.965-6.57c-.78 0-1.418.638-1.418 1.418s.638 1.418 1.418 1.418 1.418-.638 1.418-1.418-.638-1.418-1.418-1.418z" clip-rule="evenodd" /></svg></a>
+                    </div>
+                </div>
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h3 class="font-serif text-lg font-semibold text-brand-emerald mb-4">Khám Phá</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#collections" class="hover:text-brand-gold text-brand-sage">Bộ Sưu Tập</a></li>
+                        <li><a href="#bestsellers" class="hover:text-brand-gold text-brand-sage">Sản Phẩm Bán Chạy</a></li>
+                        <li><a href="#story" class="hover:text-brand-gold text-brand-sage">Về Hòa Bình</a></li>
+                        <li><a href="#blog" class="hover:text-brand-gold text-brand-sage">Góc An Yên</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3: Policies -->
+                <div>
+                     <h3 class="font-serif text-lg font-semibold text-brand-emerald mb-4">Chính Sách</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-brand-gold text-brand-sage">Chính sách Vận chuyển</a></li>
+                        <li><a href="#" class="hover:text-brand-gold text-brand-sage">Chính sách Đổi trả</a></li>
+                        <li><a href="#" class="hover:text-brand-gold text-brand-sage">Chính sách Bảo hành</a></li>
+                        <li><a href="#" class="hover:text-brand-gold text-brand-sage">Bảo mật thông tin</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4: Contact -->
+                <div>
+                    <h3 class="font-serif text-lg font-semibold text-brand-emerald mb-4">Liên Hệ (NAP)</h3>
+                    <address class="not-italic text-brand-sage space-y-2">
+                        <p><strong>Tên:</strong> Cửa hàng Trang sức Hòa Bình</p>
+                        <p><strong>Địa chỉ:</strong> 42 Chiêu Anh Các, P5, Q5, TPHCM</p>
+                        <p><strong>Điện thoại:</strong> 0909 123 456</p>
+                    </address>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-brand-sage/20 pt-8 text-center text-brand-sage">
+                <p>&copy; 2025 Hòa Bình Jewelry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript cho Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Đóng menu khi click vào một link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Hiệu ứng header khi cuộn trang
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+
+    </script>
+</body>
+</html>
+
