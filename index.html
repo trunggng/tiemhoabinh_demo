@@ -1,611 +1,780 @@
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hòa Bình - Thiết Kế Trang Sức 3D Tùy Chỉnh</title>
+    <title>Hòa Bình Jewelry - Trang Sức Bạc Cao Cấp</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <!-- Chosen Palette: Royal Fire (Gold, Crimson, Deep Teal) -->
-    <!-- Application Structure Plan: A thematic, single-page scrolling application with a fixed navigation. The structure begins with an immersive full-screen video hero, followed by an automatic image slider to immediately engage the user. This flows into brand narrative, e-commerce sections, and a new video gallery, guiding the user from inspiration to potential purchase. Login functionality has been added. -->
-    <!-- Visualization & Content Choices: Hero -> Full-screen YouTube background video. Gallery -> Automatic image slider. Sales -> Interactive product grid with JS filtering. Market -> Interactive Radar Chart (Chart.js). Symbolism -> Interactive Icon Grid with modals. These choices prioritize an immersive, high-impact user experience from the moment the page loads. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body {
-            font-family: 'Lato', sans-serif;
-            background-color: #FFF8F0; /* Light cream background */
-            color: #3D3D3D;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FDFEFE;
         }
-        h1, h2, h3, h4 {
-            font-family: 'Cormorant Garamond', serif;
-        }
-       .nav-link {
-            position: relative;
+        .text-brand-blue { color: #005f73; }
+        .bg-brand-blue { background-color: #005f73; }
+        .border-brand-blue { border-color: #005f73; }
+        .text-brand-gold { color: #c5b358; }
+        .border-brand-gold { border-color: #c5b358; }
+        .bg-brand-gold { background-color: #c5b358; }
+        .bg-brand-light { background-color: #FDFEFE; }
+        .hover-nav:hover {
+            color: #c5b358;
             transition: color 0.3s ease;
         }
-       .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #DC143C; /* Crimson accent */
-            transition: width 0.3s ease;
+        .product-card:hover .product-image, .collection-card:hover img {
+            transform: scale(1.05);
         }
-       .nav-link:hover::after,.nav-link.active::after {
-            width: 100%;
+        .product-image, .collection-card img {
+            transition: transform 0.3s ease-in-out;
         }
-       .hero-video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
+        .hero-slide {
+            display: none;
+            animation: fade 1.5s ease-in-out;
         }
-       .hero-video-container iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw;
-            height: 56.25vw; /* 16:9 aspect ratio */
-            min-height: 100vh;
-            min-width: 177.77vh; /* 16:9 aspect ratio */
-            transform: translate(-50%, -50%);
+        .hero-slide.active {
+            display: block;
         }
-       .section-fade-in {
+        .category-tag {
+            transition: all 0.3s ease;
+        }
+        .category-tag.active {
+            background-color: #005f73;
+            color: white;
+            border-color: #005f73;
+        }
+        .header-bg {
+            background-image: url('https://placehold.co/1920x200/e0f7fa/005f73?text=KHAI+TRƯƠNG+HÒA+BÌNH+BẠC&font=quicksand');
+            background-size: cover;
+            background-position: center;
+        }
+        #cart-sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        .modal {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .megamenu {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(10px);
         }
-       .section-fade-in.visible {
+        .group:hover .megamenu {
             opacity: 1;
+            visibility: visible;
             transform: translateY(0);
         }
-       .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px; /* Adjusted for mobile */
-            max-height: 450px;
-        }
-        @media (min-width: 640px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-       .btn-primary {
-            background-color: #DC143C;
-            color: white;
+        .carousel-dot {
             transition: background-color 0.3s ease;
         }
-       .btn-primary:hover {
-            background-color: #b01030;
+        .carousel-dot.active {
+            background-color: #c5b358;
         }
-       .btn-secondary {
-            background-color: #FFD700;
-            color: #3D3D3D;
-            transition: background-color 0.3s ease;
+        @keyframes fade {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
         }
-       .btn-secondary:hover {
-            background-color: #e6c300;
-        }
-       .text-gold { color: #FFD700; }
-       .bg-teal { background-color: #008080; }
-       .text-crimson { color: #DC143C; }
-       .border-gold { border-color: #FFD700; }
-
-        /* Slider Styles */
-       .slider-container {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-       .slide {
-            min-width: 100%;
-            box-sizing: border-box;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-brand-light">
 
-    <header id="header" class="bg-white/90 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-md">
-        <div class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <a href="#hero" class="text-3xl font-bold text-crimson tracking-wider">HB</a>
-            <nav class="hidden md:flex items-center space-x-4 lg:space-x-6">
-                <a href="#gallery" class="nav-link text-gray-700 hover:text-crimson">Thư Viện</a>
-                <a href="#vision" class="nav-link text-gray-700 hover:text-crimson">Tầm Nhìn</a>
-                <a href="#inspiration" class="nav-link text-gray-700 hover:text-crimson">Cảm Hứng</a>
-                <a href="#sales" class="nav-link text-gray-700 hover:text-crimson">Sản Phẩm</a>
-                <a href="#journey" class="nav-link text-gray-700 hover:text-crimson">Hành Trình</a>
-                <a href="#store-video" class="nav-link text-gray-700 hover:text-crimson">Video</a>
-                <a href="#market" class="nav-link text-gray-700 hover:text-crimson">Thị Trường</a>
-                <a href="#team" class="nav-link text-gray-700 hover:text-crimson">Đội Ngũ</a>
-                <div id="auth-links" class="flex items-center space-x-4 pl-4">
-                    <a href="#" id="login-btn" class="btn-primary px-4 py-2 rounded-md text-sm font-bold whitespace-nowrap">Đăng Nhập</a>
-                    <span id="welcome-msg" class="hidden text-gray-700 font-semibold"></span>
-                    <a href="#" id="logout-btn" class="hidden text-gray-500 hover:text-crimson text-sm font-bold">Đăng Xuất</a>
+    <!-- Header -->
+    <header class="header-bg shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 bg-white/80 backdrop-blur-sm rounded-b-lg">
+            <div class="flex justify-between items-center py-2 border-b border-brand-blue/20 text-xs text-brand-blue px-4">
+                <p>Hotline: <a href="tel:0943120069" class="hover-nav font-semibold">0943120069</a></p>
+                <p>Địa chỉ: 42 Chiêu Anh Các, P5, Q5, TPHCM</p>
+            </div>
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="text-3xl font-bold text-brand-blue tracking-wider">
+                    HÒA BÌNH
+                </a>
+                <nav class="hidden lg:flex items-center space-x-8 text-brand-blue font-semibold">
+                    <div class="relative group">
+                        <button class="hover-nav flex items-center">
+                            Trang Sức
+                            <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                        </button>
+                        <div class="megamenu absolute top-full left-1/2 -translate-x-1/2 w-screen max-w-4xl bg-white shadow-lg rounded-b-lg p-8 z-20">
+                           <div class="grid grid-cols-4 gap-8">
+                                <div class="space-y-4">
+                                    <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Nữ</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Dây chuyền</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Nhẫn</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Bông tai</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Lắc & Vòng tay</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Mặt dây chuyền</a></li>
+                                    </ul>
+                                </div>
+                                <div class="space-y-4">
+                                     <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Nam</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Dây chuyền</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Nhẫn</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Lắc & Vòng tay</a></li>
+                                    </ul>
+                                </div>
+                               <div class="space-y-4">
+                                     <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Trẻ Em</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Dây chuyền</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Bông tai</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Lắc tay & Lắc chân</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-span-1">
+                                    <a href="#" class="block rounded-lg overflow-hidden">
+                                        <img src="https://placehold.co/400x400/005f73/ffffff?text=BST+Mới" alt="New Collection" class="w-full h-full object-cover">
+                                    </a>
+                                </div>
+                           </div>
+                        </div>
+                    </div>
+                    <a href="#bo-suu-tap" class="hover-nav">Bộ Sưu Tập</a>
+                    <a href="#ve-hoa-binh" class="hover-nav">Về chúng tôi</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative" id="search-container">
+                        <div class="relative">
+                            <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." class="border bg-white/80 border-gray-300 rounded-full py-1.5 px-4 w-48 focus:outline-none focus:border-brand-gold text-gray-800 placeholder-gray-500">
+                            <i data-lucide="search" class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                        </div>
+                        <div id="search-results" class="absolute top-full mt-2 w-full max-w-sm bg-white rounded-lg shadow-lg z-30 hidden max-h-80 overflow-y-auto">
+                        </div>
+                    </div>
+                    <div id="auth-section" class="flex items-center space-x-2 text-sm">
+                        <button id="login-trigger-btn" class="text-brand-blue hover-nav font-semibold">Đăng nhập</button>
+                        <span class="text-gray-400">|</span>
+                        <button id="register-trigger-btn" class="text-brand-blue hover-nav font-semibold">Đăng ký</button>
+                    </div>
+                    <button id="cart-button" class="text-brand-blue hover-nav relative">
+                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-gold text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                    <button id="mobile-menu-button" class="lg:hidden text-brand-blue">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
                 </div>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
-                <span class="text-3xl">&#9776;</span>
-            </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md">
-            <a href="#gallery" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Thư Viện</a>
-            <a href="#vision" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Tầm Nhìn</a>
-            <a href="#inspiration" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Cảm Hứng</a>
-            <a href="#sales" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Sản Phẩm</a>
-            <a href="#journey" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Hành Trình</a>
-            <a href="#store-video" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Video</a>
-            <a href="#market" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Thị Trường</a>
-            <a href="#team" class="block text-center py-3 text-gray-700 hover:bg-gray-100">Đội Ngũ</a>
-            <div id="mobile-auth-links" class="border-t border-gray-200 mt-2 pt-2">
-                <a href="#" id="mobile-login-btn" class="block text-center py-3 text-gray-700 font-bold hover:bg-gray-100">Đăng Nhập</a>
-                 <span id="mobile-welcome-msg" class="hidden text-center py-3 text-gray-700 font-semibold"></span>
-                 <a href="#" id="mobile-logout-btn" class="hidden block text-center py-3 text-gray-500 hover:bg-gray-100">Đăng Xuất</a>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="hero" class="h-screen relative flex items-center justify-center text-center">
-            <div class="hero-video-container">
-                <iframe src="https://www.youtube.com/embed/SgZOUMC2VLE?autoplay=1&mute=1&loop=1&playlist=SgZOUMC2VLE&controls=0&showinfo=0&autohide=1&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-            <div class="relative z-10 bg-black/40 p-6 sm:p-10 rounded-xl mx-4">
-                <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4">Chế Tác Bình Yên, <span class="text-gold">Khắc Ghi Dấu Ấn</span></h1>
-                <p class="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto">Nơi mỗi thiết kế trang sức 3D là một câu chuyện riêng, một biểu tượng của sự hài hòa và vẻ đẹp vĩnh cửu.</p>
-            </div>
-        </section>
-
-        <section id="gallery" class="py-16 sm:py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 sm:mb-16">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Thư Viện Hình Ảnh</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Những khoảnh khắc được ghi lại từ không gian chế tác của chúng tôi, nơi nghệ thuật và công nghệ giao thoa.</p>
-                </div>
-                <div class="max-w-4xl mx-auto relative overflow-hidden rounded-lg shadow-xl" id="image-slider">
-                    <div class="slider-container">
-                        <img src="https://placehold.co/1200x700/008080/FFFFFF?text=Store+Interior" alt="Nội thất cửa hàng" class="slide w-full h-auto object-cover">
-                        <img src="https://placehold.co/1200x700/DC143C/FFFFFF?text=Craftsmanship" alt="Chế tác thủ công" class="slide w-full h-auto object-cover">
-                        <img src="https://placehold.co/1200x700/FFD700/3D3D3D?text=3D+Printing" alt="Công nghệ in 3D" class="slide w-full h-auto object-cover">
-                        <img src="https://placehold.co/1200x700/3D3D3D/FFFFFF?text=Happy+Customer" alt="Khách hàng hài lòng" class="slide w-full h-auto object-cover">
-                        <img src="https://placehold.co/1200x700/800080/FFFFFF?text=Gemstone+Selection" alt="Lựa chọn đá quý" class="slide w-full h-auto object-cover">
-                        <img src="https://placehold.co/1200x700/4682B4/FFFFFF?text=Final+Product" alt="Sản phẩm hoàn thiện" class="slide w-full h-auto object-cover">
-                    </div>
-                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2" id="slider-dots">
+        <!-- Hero Section -->
+        <section id="hero-carousel" class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
+            <div id="hero-slides-container">
+                <div class="hero-slide active">
+                    <img src="https://placehold.co/1920x1080/cccccc/969696?text=Loading..." alt="Dấu Ấn Tối Giản" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center text-center text-white p-4">
+                        <h1 class="text-4xl md:text-6xl font-bold" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">BST Dấu Ấn Tối Giản</h1>
+                        <p class="mt-4 text-lg md:text-xl max-w-2xl">Vẻ đẹp trong sự tinh tế, thanh lịch và hiện đại.</p>
+                        <a href="#san-pham" class="mt-8 bg-white text-brand-blue font-semibold py-3 px-8 rounded-full hover:bg-opacity-90 transition-colors">Mua Ngay</a>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="vision" class="py-16 sm:py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-4 sm:px-6 text-center max-w-4xl">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-6">Tầm Nhìn <span class="text-crimson">Hòa Bình</span></h2>
-                <p class="text-lg text-gray-600 mb-4 leading-relaxed">"Hòa Bình" không chỉ là một thương hiệu, mà là một hành trình tìm kiếm sự bình yên nội tại và sự hài hòa trong cuộc sống. Chúng tôi tin rằng trang sức không chỉ là vật trang trí, mà còn là một "điểm chạm" cá nhân, một biểu tượng mang ý nghĩa sâu sắc.</p>
-                <p class="text-lg text-gray-600 leading-relaxed">Sứ mệnh của chúng tôi là kết hợp công nghệ thiết kế 3D tiên tiến với tay nghề thủ công tinh xảo để tạo ra những món trang sức độc bản, giúp mỗi khách hàng thể hiện câu chuyện và giá trị của riêng mình.</p>
-            </div>
-        </section>
-
-        <section id="inspiration" class="py-16 sm:py-24 section-fade-in">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 sm:mb-16">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Nguồn Cảm Hứng Bất Tận</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Lấy cảm hứng từ sự đa dạng và sống động của Chợ Hòa Bình, mỗi biểu tượng mang một câu chuyện về hòa bình, tình yêu và sự cân bằng. Hãy khám phá nguồn cảm hứng cho thiết kế của bạn.</p>
+                <div class="hero-slide">
+                    <img src="https://placehold.co/1920x1080/cccccc/969696?text=Loading..." alt="Giai Điệu Tình Yêu" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-20 flex flex-col items-center justify-center text-center text-white p-4">
+                        <h1 class="text-4xl md:text-6xl font-bold" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">BST Giai Điệu Tình Yêu</h1>
+                        <p class="mt-4 text-lg md:text-xl max-w-2xl">Gửi gắm yêu thương qua những món quà tinh tế.</p>
+                        <a href="#san-pham" class="mt-8 bg-white text-brand-blue font-semibold py-3 px-8 rounded-full">Xem Ngay</a>
+                    </div>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center" id="symbol-grid">
-                </div>
-            </div>
-        </section>
-
-        <section id="sales" class="py-16 sm:py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 sm:mb-16">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Khám Phá Bộ Sưu Tập</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Những thiết kế sẵn có, được chế tác tỉ mỉ, mang đậm dấu ấn của Hòa Bình. Mỗi tác phẩm là một câu chuyện đang chờ bạn khám phá.</p>
-                </div>
-                <div class="flex justify-center space-x-2 md:space-x-4 mb-12" id="product-filters">
-                    <button class="filter-btn active btn-primary px-4 py-2 rounded-full text-sm md:text-base" data-filter="all">Tất Cả</button>
-                    <button class="filter-btn btn-secondary px-4 py-2 rounded-full text-sm md:text-base" data-filter="nhẫn">Nhẫn</button>
-                    <button class="filter-btn btn-secondary px-4 py-2 rounded-full text-sm md:text-base" data-filter="dây chuyền">Dây Chuyền</button>
-                    <button class="filter-btn btn-secondary px-4 py-2 rounded-full text-sm md:text-base" data-filter="bông tai">Bông Tai</button>
-                </div>
-                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-                </div>
-            </div>
-        </section>
-
-        <section id="journey" class="py-16 sm:py-24 section-fade-in">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 sm:mb-16">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Hành Trình Sáng Tạo Của Bạn</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Chúng tôi đồng hành cùng bạn qua từng bước, từ ý tưởng ban đầu đến tác phẩm hoàn thiện, đảm bảo mỗi chi tiết đều hoàn hảo.</p>
-                </div>
-                <div class="relative">
-                    <div class="hidden md:block absolute top-12 left-0 w-full h-1 bg-gold opacity-30"></div>
-                    <div class="grid md:grid-cols-4 gap-12 relative">
-                        <div class="text-center flex flex-col items-center">
-                            <div class="flex items-center justify-center w-24 h-24 mx-auto bg-teal text-white rounded-full text-4xl font-bold mb-4 z-10 relative shadow-lg">💡</div>
-                            <h3 class="text-2xl font-bold mb-2 mt-4">Phác Thảo Ý Tưởng</h3>
-                            <p class="text-gray-600 leading-relaxed">Bắt đầu từ cảm hứng của bạn, chúng tôi cùng nhau định hình và phác thảo ý tưởng ban đầu.</p>
-                        </div>
-                        <div class="text-center flex flex-col items-center">
-                            <div class="flex items-center justify-center w-24 h-24 mx-auto bg-teal text-white rounded-full text-4xl font-bold mb-4 z-10 relative shadow-lg">💻</div>
-                            <h3 class="text-2xl font-bold mb-2 mt-4">Mô Phỏng 3D</h3>
-                            <p class="text-gray-600 leading-relaxed">Chuyển hóa phác thảo thành mô hình 3D chi tiết, tinh chỉnh từng đường nét và hình khối.</p>
-                        </div>
-                        <div class="text-center flex flex-col items-center">
-                            <div class="flex items-center justify-center w-24 h-24 mx-auto bg-teal text-white rounded-full text-4xl font-bold mb-4 z-10 relative shadow-lg">🖨️</div>
-                            <h3 class="text-2xl font-bold mb-2 mt-4">Chế Tác Mẫu</h3>
-                            <p class="text-gray-600 leading-relaxed">Sử dụng công nghệ in 3D resin tiên tiến để tạo ra mẫu vật liệu ban đầu với độ chính xác tuyệt đối.</p>
-                        </div>
-                        <div class="text-center flex flex-col items-center">
-                            <div class="flex items-center justify-center w-24 h-24 mx-auto bg-teal text-white rounded-full text-4xl font-bold mb-4 z-10 relative shadow-lg">✨</div>
-                            <h3 class="text-2xl font-bold mb-2 mt-4">Hoàn Thiện Tinh Xảo</h3>
-                            <p class="text-gray-600 leading-relaxed">Các nghệ nhân tài hoa thực hiện các công đoạn thủ công để hoàn thiện tác phẩm với vẻ đẹp rạng ngời.</p>
-                        </div>
+                <div class="hero-slide">
+                    <img src="https://placehold.co/1920x1080/cccccc/969696?text=Loading..." alt="Nét Chạm Hoàng Kim" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center text-center text-white p-4">
+                        <h1 class="text-4xl md:text-6xl font-bold text-brand-gold" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">BST Nét Chạm Hoàng Kim</h1>
+                        <p class="mt-4 text-lg md:text-xl max-w-2xl">Sự kết hợp hoàn hảo giữa bạc và chi tiết mạ vàng.</p>
+                        <a href="#san-pham" class="mt-8 bg-brand-gold text-white font-semibold py-3 px-8 rounded-full">Khám Phá</a>
                     </div>
                 </div>
             </div>
+            <div id="carousel-dots" class="absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-2"></div>
         </section>
 
-        <section id="store-video" class="py-16 sm:py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 sm:mb-16">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Video Giới Thiệu Tiệm</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">Cùng khám phá không gian và quy trình làm việc chuyên nghiệp tại Hòa Bình qua video giới thiệu của chúng tôi.</p>
+        <!-- Brand Promise Section -->
+        <section class="bg-gray-100">
+            <div class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm">
+                    <i data-lucide="truck" class="w-10 h-10 text-brand-blue mr-4"></i>
+                    <div><h3 class="font-bold text-brand-blue">Giao Hàng Toàn Quốc</h3></div>
                 </div>
-                <div class="max-w-4xl mx-auto rounded-lg overflow-hidden shadow-xl">
-                     <div class="aspect-w-16 aspect-h-9">
-                        <iframe src="https://www.youtube.com/embed/GBb4M-L5fG4?si=__-oN-t8a9b-cZ-d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="w-full h-full"></iframe>
-                    </div>
+                <div class="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm">
+                    <i data-lucide="heart-handshake" class="w-10 h-10 text-brand-blue mr-4"></i>
+                    <div><h3 class="font-bold text-brand-blue">Dịch Vụ Tận Tâm</h3></div>
                 </div>
-            </div>
-        </section>
-
-        <section id="market" class="py-16 sm:py-24 section-fade-in">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">Bối Cảnh Thị Trường</h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">Chúng tôi đặt mục tiêu vượt trội bằng cách kết hợp công nghệ, nghệ thuật và trải nghiệm khách hàng độc đáo. So sánh mục tiêu của Hòa Bình với các đối thủ cạnh tranh.</p>
-                </div>
-                <div class="max-w-4xl mx-auto bg-white p-4 sm:p-6 rounded-lg shadow-xl">
-                    <div class="flex justify-center items-center mb-6">
-                        <label for="competitor-select" class="mr-4 font-semibold text-lg">So sánh với:</label>
-                        <select id="competitor-select" class="p-2 border-2 border-gray-300 rounded-md bg-gray-50 focus:border-crimson focus:ring-0">
-                            <option value="VRAI">VRAI</option>
-                            <option value="Blue Nile">Blue Nile</option>
-                            <option value="Saint Valentine">Saint Valentine</option>
-                        </select>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="competitorChart"></canvas>
-                    </div>
+                <div class="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm">
+                    <i data-lucide="gem" class="w-10 h-10 text-brand-blue mr-4"></i>
+                    <div><h3 class="font-bold text-brand-blue">Chất Lượng Cao</h3></div>
                 </div>
             </div>
         </section>
         
-        <section id="team" class="py-16 sm:py-24 bg-white section-fade-in">
-            <div class="container mx-auto px-4 sm:px-6 text-center max-w-5xl">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-6">Đội Ngũ Chuyên Gia</h2>
-                <p class="text-lg text-gray-600 mb-12 leading-relaxed">Đằng sau mỗi tác phẩm là đội ngũ tận tâm, những người mang kinh nghiệm và uy tín để biến ý tưởng của bạn thành hiện thực.</p>
-                <div class="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
-                    <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center">
-                        <img src="https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/475141379_1591288251747981_7502564262505491645_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF757DMkw9jRbA2fRRcWG8xTpRlT-qaBP5OlGVP6poE_v3_sUEY8CR5osthleN_zz0XZ-QJyxtV-Z9ByuQxRHLL&_nc_ohc=b91uoBHS6nkQ7kNvwHEa_hd&_nc_oc=AdndjeyJL9y9WeuDm9n8-zurgtji4uSfXstK2qJA_fjyQ12EOhyK7IX9qy3kMEj04SWsSG_MHl7k-iJX_q3_fmWY&_nc_zt=23&_nc_ht=scontent.fsgn8-4.fna&_nc_gid=4C-aIIrXuFOag4yjYOIUZA&oh=00_AfR9YOAXrTUO5TGGYcE8hXyl0SuA6knN8MCFfqGCUP7maA&oe=6886DEDC" onerror="this.onerror=null;this.src='https://placehold.co/200x200/CCCCCC/FFFFFF?text=DQ';" alt="Duy Quang" class="rounded-full mx-auto mb-6 w-40 h-40 object-cover border-4 border-gold">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-2">DUY QUANG</h3>
-                        <p class="text-xl text-crimson mb-4">Quản lý điều hành</p>
-                        <p class="text-gray-600 leading-relaxed">Với sự tận tâm và uy tín đã được khẳng định, anh Duy Quang đảm bảo mọi quy trình đều diễn ra suôn sẻ và sản phẩm đạt chất lượng cao nhất.</p>
+        <!-- Category Tags -->
+        <section class="bg-white py-4 border-b">
+            <div id="category-filter-bar" class="container mx-auto px-4 flex justify-center items-center space-x-2 md:space-x-4">
+                <button data-category="all" class="category-tag active text-sm md:text-base font-semibold border-2 border-gray-300 rounded-full px-4 py-1.5 hover:bg-brand-blue hover:text-white hover:border-brand-blue">Tất cả</button>
+                <button data-category="nu" class="category-tag text-sm md:text-base font-semibold border-2 border-gray-300 rounded-full px-4 py-1.5 hover:bg-brand-blue hover:text-white hover:border-brand-blue">Nữ</button>
+                <button data-category="nam" class="category-tag text-sm md:text-base font-semibold border-2 border-gray-300 rounded-full px-4 py-1.5 hover:bg-brand-blue hover:text-white hover:border-brand-blue">Nam</button>
+                <button data-category="tre-em" class="category-tag text-sm md:text-base font-semibold border-2 border-gray-300 rounded-full px-4 py-1.5 hover:bg-brand-blue hover:text-white hover:border-brand-blue">Trẻ em</button>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="san-pham" class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-brand-blue">Sản Phẩm Của Chúng Tôi</h2>
+                    <div id="admin-controls" class="mt-4"></div>
+                </div>
+                <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+                    <!-- Products dynamically injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Collection Section -->
+        <section id="bo-suu-tap" class="py-16 bg-white">
+             <div class="container mx-auto px-4">
+                 <h2 class="text-3xl font-bold text-center text-brand-blue mb-10">Bộ Sưu Tập Mới</h2>
+                 <div class="grid md:grid-cols-2 gap-8 items-center">
+                       <div class="order-2 md:order-1">
+                           <h3 class="text-2xl font-bold text-brand-blue">BST "Vũ Khúc Đại Dương"</h3>
+                           <p class="mt-4 text-gray-600 leading-relaxed">Lấy cảm hứng từ vẻ đẹp của đại dương xanh thẳm, bộ sưu tập "Vũ Khúc Đại Dương" là sự kết hợp hài hòa giữa bạc 925 cao cấp và những đường nét thiết kế mềm mại, uyển chuyển.</p>
+                           <a href="#" class="inline-block mt-6 bg-brand-blue text-white font-semibold py-2 px-6 rounded-full hover:bg-opacity-90">Khám Phá Ngay</a>
+                       </div>
+                       <div class="order-1 md:order-2">
+                           <img src="https://placehold.co/800x600/005f73/FDFEFE?text=BST" alt="Collection" class="w-full h-auto rounded-lg shadow-lg">
+                       </div>
+                 </div>
+            </div>
+        </section>
+        
+        <!-- Feedback Section -->
+        <section id="gop-y" class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold text-brand-blue mb-4">Góp Ý Sản Phẩm</h2>
+                    <p class="text-gray-600 mb-8">Chúng tôi luôn lắng nghe ý kiến của bạn để cải thiện sản phẩm và dịch vụ.</p>
+                    <form id="feedback-form" class="text-left">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <input type="text" placeholder="Họ và Tên" class="w-full px-4 py-2 border rounded-md" required>
+                            <input type="email" placeholder="Email" class="w-full px-4 py-2 border rounded-md" required>
+                        </div>
+                        <div class="mb-6">
+                            <textarea placeholder="Nội dung góp ý" rows="4" class="w-full px-4 py-2 border rounded-md" required></textarea>
+                        </div>
+                        <div class="text-center">
+                             <button type="submit" class="bg-brand-blue text-white font-bold py-3 px-10 rounded-full hover:bg-brand-gold">Gửi Góp Ý</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- About/Promise Section -->
+        <section id="ve-hoa-binh" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6">
+                        <div class="flex justify-center mb-4"><div class="w-16 h-16 bg-brand-gold text-white rounded-full flex items-center justify-center"><i data-lucide="gem" class="w-8 h-8"></i></div></div>
+                        <h4 class="text-xl font-bold text-brand-blue mb-2">Chất Lượng Vượt Trội</h4>
+                        <p class="text-gray-600">Sử dụng bạc 925 tiêu chuẩn, đảm bảo độ bền và sáng bóng.</p>
                     </div>
-                    <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center">
-                        <img src="https://placehold.co/400x300/008080/FFFFFF?text=Team" onerror="this.onerror=null;this.src='https://placehold.co/400x300/008080/FFFFFF?text=Team';" alt="Đội Ngũ Hòa Bình" class="rounded-lg mb-6 w-full h-auto object-cover">
-                        <h3 class="text-3xl font-bold text-gray-800 mb-2">Đội Ngũ Hòa Bình</h3>
-                        <p class="text-gray-600 leading-relaxed">Tập thể những con người đam mê và tài năng, cùng nhau kiến tạo nên những giá trị bền vững cho thương hiệu Hòa Bình.</p>
+                     <div class="p-6">
+                        <div class="flex justify-center mb-4"><div class="w-16 h-16 bg-brand-gold text-white rounded-full flex items-center justify-center"><i data-lucide="paintbrush-2" class="w-8 h-8"></i></div></div>
+                        <h4 class="text-xl font-bold text-brand-blue mb-2">Thiết Kế Tinh Xảo</h4>
+                        <p class="text-gray-600">Sản phẩm độc đáo được chế tác bởi nghệ nhân lành nghề.</p>
+                    </div>
+                     <div class="p-6">
+                        <div class="flex justify-center mb-4"><div class="w-16 h-16 bg-brand-gold text-white rounded-full flex items-center justify-center"><i data-lucide="shield-check" class="w-8 h-8"></i></div></div>
+                        <h4 class="text-xl font-bold text-brand-blue mb-2">Bảo Hành Tin Cậy</h4>
+                        <p class="text-gray-600">Chính sách bảo hành và làm sáng miễn phí trọn đời.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-teal text-white">
-        <div class="container mx-auto px-4 sm:px-6 py-16">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Tham Gia Hành Trình Cùng Hòa Bình</h2>
-                <p class="text-gray-200 max-w-xl mx-auto">Đăng ký để nhận những thông tin mới nhất, nguồn cảm hứng thiết kế và các ưu đãi độc quyền.</p>
-                <form class="mt-8 flex flex-col sm:flex-row justify-center max-w-lg mx-auto">
-                    <input type="email" placeholder="Địa chỉ email của bạn" class="w-full sm:w-auto flex-grow px-4 py-3 rounded-md sm:rounded-r-none text-gray-800 focus:outline-none focus:ring-2 focus:ring-gold">
-                    <button type="submit" class="btn-primary text-white px-6 py-3 mt-2 sm:mt-0 rounded-md sm:rounded-l-none">Đăng Ký</button>
-                </form>
-            </div>
-            <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-300 text-sm">&copy; 2018 - 2025 Hòa Bình. Mọi quyền được bảo lưu.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-300 hover:text-gold">Facebook</a>
-                    <a href="#" class="text-gray-300 hover:text-gold">Instagram</a>
-                    <a href="#" class="text-gray-300 hover:text-gold">Pinterest</a>
+    <!-- Footer -->
+    <footer class="bg-brand-blue text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold text-brand-gold mb-4">HÒA BÌNH JEWELRY</h4>
+                    <p class="text-gray-300">Nơi vẻ đẹp và sự tinh tế được tôn vinh.</p>
                 </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Chăm Sóc Khách Hàng</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-brand-gold">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#" class="hover:text-brand-gold">Chính sách đổi trả</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Thông Tin Liên Hệ</h4>
+                     <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start"><i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-1"></i>42 Chiêu Anh Các, P5, Q5, TPHCM</li>
+                        <li class="flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-2"></i>0943120069</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Đăng Ký Nhận Tin</h4>
+                    <div class="flex">
+                        <input type="email" placeholder="Email của bạn" class="w-full rounded-l-md p-2 text-gray-800">
+                        <button class="bg-brand-gold text-white font-semibold px-4 rounded-r-md">Đăng Ký</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Hòa Bình Jewelry. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Login Modal -->
-    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-sm p-8 relative">
-            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
-            <h2 class="text-3xl font-bold text-center mb-4">Đăng Nhập</h2>
-            <p id="login-message" class="text-center h-5 mb-4"></p>
+    <!-- Modals and Sidebars -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[101] hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-sm p-8 relative">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 close-modal-btn"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <h2 class="text-2xl font-bold text-center text-brand-blue mb-6">Đăng Nhập</h2>
             <form id="login-form">
-                <div class="mb-4">
-                    <label for="username" class="block text-gray-700 mb-2">Tên đăng nhập</label>
-                    <input type="text" id="username" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-crimson" required>
-                </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-gray-700 mb-2">Mật khẩu</label>
-                    <input type="password" id="password" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-crimson" required>
-                </div>
-                <button type="submit" class="w-full btn-primary py-2 rounded-md font-bold">Đăng Nhập</button>
+                <input type="email" id="login-email" placeholder="Email" class="w-full px-4 py-2 border rounded-md mb-4" required>
+                <input type="password" id="login-password" placeholder="Mật khẩu" class="w-full px-4 py-2 border rounded-md mb-6" required>
+                <p id="login-error-message" class="text-red-500 text-sm mb-4 text-center"></p>
+                <button type="submit" class="w-full bg-brand-blue text-white font-bold py-2 rounded-md">Đăng Nhập</button>
             </form>
         </div>
     </div>
-
-    <!-- Symbol Modal -->
-    <div id="symbol-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto flex flex-col md:flex-row">
-            <div class="w-full md:w-1/2">
-                <img id="modal-img" src="" alt="Symbol Image" class="w-full h-64 md:h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none">
+    <div id="register-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[101] hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-sm p-8 relative">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 close-modal-btn"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <h2 class="text-2xl font-bold text-center text-brand-blue mb-6">Đăng Ký</h2>
+            <form id="register-form">
+                <input type="email" id="register-email" placeholder="Email" class="w-full px-4 py-2 border rounded-md mb-4" required>
+                <input type="password" id="register-password" placeholder="Mật khẩu" class="w-full px-4 py-2 border rounded-md mb-6" required>
+                <p id="register-error-message" class="text-red-500 text-sm mb-4 text-center"></p>
+                <button type="submit" class="w-full bg-brand-blue text-white font-bold py-2 rounded-md">Đăng Ký</button>
+            </form>
+        </div>
+    </div>
+    <div id="add-product-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[101] hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-8 relative">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 close-modal-btn"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <h2 class="text-2xl font-bold text-center text-brand-blue mb-6">Thêm Sản Phẩm Mới</h2>
+            <form id="add-product-form">
+                <input type="url" id="add-product-image" placeholder="URL Hình ảnh" class="w-full px-4 py-2 border rounded-md mb-4" required>
+                <input type="number" id="add-product-price" placeholder="Giá (VND)" class="w-full px-4 py-2 border rounded-md mb-6" required>
+                <p id="add-product-error" class="text-red-500 text-sm mb-4 text-center"></p>
+                <button type="submit" class="w-full bg-brand-blue text-white font-bold py-2 rounded-md">Thêm Sản Phẩm</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-[98] hidden"></div>
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-[99] transform translate-x-full flex flex-col">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h2 class="text-xl font-bold text-brand-blue">Giỏ Hàng Của Bạn</h2>
+            <button id="close-cart-button" class="text-gray-500 hover:text-gray-800">
+                <i data-lucide="x" class="w-6 h-6 pointer-events-none"></i>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-grow p-4 overflow-y-auto">
+             <!-- Cart items are rendered here -->
+        </div>
+        <div class="p-4 border-t bg-gray-50">
+            <div class="flex justify-between items-center font-bold text-lg mb-4">
+                <span>Tổng cộng:</span>
+                <span id="cart-total" class="text-brand-blue">0₫</span>
             </div>
-            <div class="p-8 w-full md:w-1/2 flex flex-col">
-                <h3 id="modal-title" class="text-3xl font-bold text-gray-800 mb-4"></h3>
-                <p id="modal-meaning" class="text-gray-600 mb-4 flex-grow leading-relaxed"></p>
-                <div class="mb-4">
-                    <h4 class="font-semibold text-gray-800 mb-2">Vật liệu đề xuất:</h4>
-                    <p id="modal-materials" class="text-gray-600"></p>
-                </div>
-                <div class="mb-6">
-                    <h4 class="font-semibold text-gray-800 mb-2">Góc nhìn thương hiệu:</h4>
-                    <p id="modal-marketing" class="text-gray-600 italic"></p>
-                </div>
-                <button id="modal-close" class="mt-auto btn-primary py-2 px-6 rounded-lg self-start">Đóng</button>
+            <button id="checkout-button" class="w-full bg-brand-gold text-white font-bold py-3 rounded-lg hover:bg-opacity-90">
+                Tiến Hành Thanh Toán
+            </button>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[101] hidden">
+         <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-8 relative text-center">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 close-modal-btn">
+                <i data-lucide="x" class="w-6 h-6 pointer-events-none"></i>
+            </button>
+            <h2 class="text-2xl font-bold text-center text-brand-blue mb-4">Thanh Toán Đơn Hàng</h2>
+            <p class="text-gray-600 mb-4">Vui lòng quét mã QR để thanh toán. Cảm ơn bạn!</p>
+            <img src="https://placehold.co/300x300/e2e8f0/333333?text=QR+Code" alt="QR Code" class="mx-auto rounded-lg">
+            <div class="mt-4 text-left bg-gray-50 p-4 rounded-lg">
+                 <p class="text-gray-700 mt-2"><span class="font-semibold">Số tiền:</span> <strong id="payment-total" class="text-red-600"></strong></p>
+                 <p class="text-gray-700 mt-2 font-semibold">Nội dung chuyển khoản:</p>
+                 <p id="payment-description" class="text-brand-blue font-bold text-center mt-1 p-2 bg-gray-200 rounded"></p>
             </div>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mobile Menu Logic
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            document.querySelectorAll('#mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-            });
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc, deleteField } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-            // Active Nav Link on Scroll
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('header nav a.nav-link');
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('id');
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${id}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, { root: null, rootMargin: '0px', threshold: 0.5 });
-            sections.forEach(section => sectionObserver.observe(section));
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOEOfs3nXbaPR1OWsdbVlIgKKjoIh27N8",
+            authDomain: "kimhoanhoabinh.firebaseapp.com",
+            projectId: "kimhoanhoabinh",
+            storageBucket: "kimhoanhoabinh.appspot.com",
+            messagingSenderId: "632319260444",
+            appId: "1:632319260444:web:27c21be148b02b601a6cd9",
+        };
 
-            // Fade-in on Scroll
-            const fadeObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.section-fade-in').forEach(section => fadeObserver.observe(section));
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-            // Symbol Modal Logic
-            const symbols = [
-                { name: 'Chim bồ câu', meaning: 'Biểu tượng của hy vọng, hòa bình, sứ giả của tình yêu và lòng chung thủy. Thiết kế mang hình ảnh chim bồ câu thể hiện một cam kết bình yên và bền chặt.', materials: 'Bạc, Vàng trắng, Kim cương trắng', marketing: 'Biểu tượng của sự bình yên và hy vọng vĩnh cửu.', icon: '🕊️', image: 'https://placehold.co/600x800/E0E0E0/4A4A4A?text=Dove' },
-                { name: 'Hoa sen', meaning: 'Đại diện cho sự tái sinh, tinh khiết và khả năng vượt lên khó khăn. Trang sức hoa sen là lời nhắc nhở về vẻ đẹp và sức mạnh nội tâm.', materials: 'Vàng hồng, Đá mặt trăng, Ngọc trai', marketing: 'Nở rộ sự bình yên bên trong bạn.', icon: '🌸', image: 'https://placehold.co/600x800/F5D7DC/4A4A4A?text=Lotus' },
-                { name: 'Vòng tròn', meaning: 'Tượng trưng cho sự vĩnh cửu, thống nhất, và một tình yêu không có điểm kết thúc. Một lựa chọn hoàn hảo cho các món đồ kỷ niệm và cam kết.', materials: 'Vàng, Bạch kim, Kim cương', marketing: 'Tình yêu và sự thống nhất không giới hạn.', icon: '⭕', image: 'https://placehold.co/600x800/FFD700/4A4A4A?text=Circle' },
-                { name: 'Cành ô liu', meaning: 'Biểu tượng cổ điển của hòa bình, chiến thắng và sự thịnh vượng. Thiết kế mang họa tiết lá ô liu mang lại cảm giác thanh lịch và ý nghĩa.', materials: 'Vàng xanh, Peridot, Ngọc lục bảo', marketing: 'Biểu tượng của hòa bình và sự thịnh vượng.', icon: '🌿', image: 'https://placehold.co/600x800/D1E7DD/4A4A4A?text=Olive' },
-                { name: 'Sự cân bằng', meaning: 'Đại diện cho sự ổn định, công bằng và hài hòa. Các thiết kế đối xứng hoặc sử dụng biểu tượng Âm-Dương thể hiện sự cân bằng trong cuộc sống.', materials: 'Bạc, Onyx đen, Howlite trắng', marketing: 'Đạt được sự cân bằng trong cuộc sống.', icon: '⚖️', image: 'https://placehold.co/600x800/CCCCCC/4A4A4A?text=Balance' }
-            ];
-            const symbolGrid = document.getElementById('symbol-grid');
-            const symbolModal = document.getElementById('symbol-modal');
-            symbols.forEach(symbol => {
-                const symbolEl = document.createElement('div');
-                symbolEl.className = 'cursor-pointer group';
-                symbolEl.innerHTML = `<div class="flex items-center justify-center w-24 h-24 mx-auto bg-white rounded-full shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 border-2 border-gold/50"><span class="text-5xl">${symbol.icon}</span></div><h3 class="mt-4 text-xl font-bold text-gray-800">${symbol.name}</h3>`;
-                symbolEl.addEventListener('click', () => {
-                    document.getElementById('modal-img').src = symbol.image;
-                    document.getElementById('modal-title').textContent = symbol.name;
-                    document.getElementById('modal-meaning').textContent = symbol.meaning;
-                    document.getElementById('modal-materials').textContent = symbol.materials;
-                    document.getElementById('modal-marketing').textContent = `"${symbol.marketing}"`;
-                    symbolModal.classList.remove('hidden');
-                    symbolModal.classList.add('flex');
-                });
-                symbolGrid.appendChild(symbolEl);
-            });
-            const closeSymbolModal = () => { symbolModal.classList.add('hidden'); symbolModal.classList.remove('flex'); };
-            document.getElementById('modal-close').addEventListener('click', closeSymbolModal);
-            symbolModal.addEventListener('click', (e) => { if (e.target === symbolModal) closeSymbolModal(); });
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            
+            let isAdmin = false;
+            let allProducts = [];
+            let cart = [];
 
-            // Product Filtering Logic
-            const products = [
-                { id: 1, name: 'Nhẫn Solitaire Vàng Trắng', price: '120.000.000 ₫', category: 'nhẫn', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Ring+1' },
-                { id: 2, name: 'Dây Chuyền Mặt Sen Vàng Hồng', price: '45.000.000 ₫', category: 'dây chuyền', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Necklace+1' },
-                { id: 3, name: 'Bông Tai Kim Cương Halo', price: '75.000.000 ₫', category: 'bông tai', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Earrings+1' },
-                { id: 4, name: 'Nhẫn Nam Onyx Đen', price: '55.000.000 ₫', category: 'nhẫn', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Ring+2' },
-                { id: 5, name: 'Nhẫn Eternity Kim Cương', price: '98.000.000 ₫', category: 'nhẫn', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Ring+3' },
-                { id: 6, name: 'Dây Chuyền Chữ Cái Cá Nhân', price: '32.000.000 ₫', category: 'dây chuyền', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Necklace+2' },
-                { id: 7, name: 'Bông Tai Ngọc Trai Akoya', price: '48.000.000 ₫', category: 'bông tai', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Earrings+2' },
-                { id: 8, name: 'Dây Chuyền Cành Ô Liu', price: '62.000.000 ₫', category: 'dây chuyền', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Necklace+3' },
-                { id: 9, name: 'Nhẫn Cưới Bạch Kim', price: '85.000.000 ₫', category: 'nhẫn', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Ring+4' },
-                { id: 10, name: 'Bông Tai Stud Kim Cương', price: '65.000.000 ₫', category: 'bông tai', image: 'https://placehold.co/600x600/FFFFFF/DC143C?text=Earrings+3' }
-            ];
+            // DOM Elements
+            const authSection = document.getElementById('auth-section');
+            const loginModal = document.getElementById('login-modal');
+            const registerModal = document.getElementById('register-modal');
+            const addProductModal = document.getElementById('add-product-modal');
+            const paymentModal = document.getElementById('payment-modal');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const addProductForm = document.getElementById('add-product-form');
             const productGrid = document.getElementById('product-grid');
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const displayProducts = (filteredProducts) => {
-                productGrid.innerHTML = '';
-                filteredProducts.forEach(product => {
-                    const productCard = document.createElement('div');
-                    productCard.className = 'bg-white rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300';
-                    productCard.innerHTML = `<div class="relative"><img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover"><div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center"><button class="btn-primary text-white px-6 py-2 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">Thêm vào giỏ</button></div></div><div class="p-6 text-center"><h3 class="text-xl font-semibold text-gray-800 mb-2">${product.name}</h3><p class="text-lg font-bold text-crimson">${product.price}</p></div>`;
-                    productGrid.appendChild(productCard);
-                });
-            };
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterBtns.forEach(b => { b.classList.remove('active', 'btn-primary'); b.classList.add('btn-secondary'); });
-                    btn.classList.add('active', 'btn-primary');
-                    btn.classList.remove('btn-secondary');
-                    const filter = btn.dataset.filter;
-                    const filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
-                    displayProducts(filteredProducts);
-                });
-            });
-            displayProducts(products);
+            const adminControls = document.getElementById('admin-controls');
+            const categoryFilterBar = document.getElementById('category-filter-bar');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const cartOverlay = document.getElementById('cart-overlay');
 
-            // Image Slider Logic
-            const sliderContainer = document.querySelector('#image-slider .slider-container');
-            const slides = document.querySelectorAll('#image-slider .slide');
-            const dotsContainer = document.getElementById('slider-dots');
-            let currentIndex = 0;
-            const slideInterval = 5000;
+            // --- Carousel Logic ---
+            const slidesContainer = document.getElementById('hero-slides-container');
+            const slides = slidesContainer.querySelectorAll('.hero-slide');
+            const dotsContainer = document.getElementById('carousel-dots');
+            let currentSlide = 0;
+            let slideInterval;
+
             if (slides.length > 0) {
                 slides.forEach((_, index) => {
                     const dot = document.createElement('button');
-                    dot.classList.add('w-3', 'h-3', 'rounded-full', 'transition-colors', 'duration-300', index === 0 ? 'bg-white' : 'bg-white/50');
-                    dot.addEventListener('click', () => goToSlide(index));
+                    dot.classList.add('carousel-dot', 'w-3', 'h-3', 'bg-white', 'rounded-full');
+                    dot.addEventListener('click', () => { goToSlide(index); resetInterval(); });
                     dotsContainer.appendChild(dot);
                 });
-                const dots = dotsContainer.querySelectorAll('button');
-                const updateDots = () => {
-                    dots.forEach((dot, index) => {
-                        dot.classList.toggle('bg-white', index === currentIndex);
-                        dot.classList.toggle('bg-white/50', index !== currentIndex);
-                    });
+                const dots = dotsContainer.querySelectorAll('.carousel-dot');
+                const goToSlide = (slideIndex) => {
+                    slides[currentSlide].classList.remove('active');
+                    dots[currentSlide].classList.remove('active');
+                    currentSlide = slideIndex;
+                    slides[currentSlide].classList.add('active');
+                    dots[currentSlide].classList.add('active');
                 };
-                const goToSlide = (index) => { currentIndex = index; sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`; updateDots(); };
-                const nextSlide = () => { currentIndex = (currentIndex + 1) % slides.length; goToSlide(currentIndex); };
-                setInterval(nextSlide, slideInterval);
+                const nextSlide = () => goToSlide((currentSlide + 1) % slides.length);
+                const resetInterval = () => { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 5000); };
+                dots[0].classList.add('active');
+                slideInterval = setInterval(nextSlide, 5000);
             }
+            // --- End Carousel ---
 
-            // Chart Logic
-            const competitorData = {
-                labels: ['Ảnh HD', 'Xem 360°', 'Thử AR', 'Tùy Chỉnh', 'Giáo Dục', 'Thanh Toán', 'Di Động', 'Thân Thiết'],
-                datasets: [
-                    { label: 'Hòa Bình (Mục Tiêu)', data: [10, 10, 9, 10, 8, 10, 10, 8], backgroundColor: 'rgba(220, 20, 60, 0.2)', borderColor: 'rgba(220, 20, 60, 1)', pointBackgroundColor: 'rgba(220, 20, 60, 1)', pointBorderColor: '#fff', pointHoverBackgroundColor: '#fff', pointHoverBorderColor: 'rgba(220, 20, 60, 1)' },
-                    { label: 'VRAI', data: [10, 10, 9, 9, 8, 9, 9, 0], backgroundColor: 'rgba(0, 128, 128, 0.2)', borderColor: 'rgba(0, 128, 128, 1)', pointBackgroundColor: 'rgba(0, 128, 128, 1)', pointBorderColor: '#fff', pointHoverBackgroundColor: '#fff', pointHoverBorderColor: 'rgba(0, 128, 128, 1)' },
-                    { label: 'Blue Nile', data: [10, 10, 9, 9, 9, 9, 9, 8], backgroundColor: 'rgba(75, 128, 192, 0.2)', borderColor: 'rgba(75, 128, 192, 1)', pointBackgroundColor: 'rgba(75, 128, 192, 1)' },
-                    { label: 'Saint Valentine', data: [10, 8, 0, 0, 0, 9, 9, 8], backgroundColor: 'rgba(211, 122, 122, 0.2)', borderColor: 'rgba(211, 122, 122, 1)', pointBackgroundColor: 'rgba(211, 122, 122, 1)' }
-                ]
-            };
-            const ctx = document.getElementById('competitorChart').getContext('2d');
-            const competitorChart = new Chart(ctx, {
-                type: 'radar',
-                data: { labels: competitorData.labels, datasets: [competitorData.datasets[0], competitorData.datasets[1]] },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    scales: { r: { angleLines: { color: 'rgba(0, 0, 0, 0.1)' }, grid: { color: 'rgba(0, 0, 0, 0.1)' }, pointLabels: { font: { size: 13, family: "'Lato', sans-serif" }, color: '#3D3D3D' }, ticks: { backdropColor: 'transparent', stepSize: 2 }, suggestedMin: 0, suggestedMax: 10 } },
-                    plugins: { legend: { position: 'top', labels: { font: { size: 14, family: "'Lato', sans-serif" } } }, tooltip: { callbacks: { label: (context) => `${context.dataset.label || ''}: ${context.parsed.r !== null ? context.parsed.r + '/10' : ''}` } } }
+            const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+
+            const renderProducts = (productsToRender) => {
+                productGrid.innerHTML = productsToRender.map(p => createProductCardHTML(p)).join('');
+                if (isAdmin) {
+                    lucide.createIcons();
                 }
-            });
-            document.getElementById('competitor-select').addEventListener('change', (e) => {
-                const selectedCompetitor = e.target.value;
-                competitorChart.data.datasets[1] = competitorData.datasets.find(d => d.label === selectedCompetitor);
-                competitorChart.update();
-            });
-
-            // Login Logic
-            const loginModal = document.getElementById('login-modal');
-            const loginBtn = document.getElementById('login-btn');
-            const mobileLoginBtn = document.getElementById('mobile-login-btn');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-            const loginForm = document.getElementById('login-form');
-            const welcomeMsg = document.getElementById('welcome-msg');
-            const logoutBtn = document.getElementById('logout-btn');
-            const mobileWelcomeMsg = document.getElementById('mobile-welcome-msg');
-            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
-            const loginMessage = document.getElementById('login-message');
-
-            const openLoginModal = () => {
-                loginMessage.textContent = '';
-                loginForm.reset();
-                loginModal.classList.remove('hidden');
-                loginModal.classList.add('flex');
-            };
-            const closeLoginModal = () => {
-                loginModal.classList.add('hidden');
-                loginModal.classList.remove('flex');
             };
 
-            loginBtn.addEventListener('click', (e) => { e.preventDefault(); openLoginModal(); });
-            mobileLoginBtn.addEventListener('click', (e) => { e.preventDefault(); openLoginModal(); });
-            closeModalBtn.addEventListener('click', closeLoginModal);
-            loginModal.addEventListener('click', (e) => { if (e.target === loginModal) closeLoginModal(); });
-
-            const handleLoginSuccess = (username) => {
-                loginMessage.textContent = 'Đăng nhập thành công!';
-                loginMessage.classList.remove('text-red-500');
-                loginMessage.classList.add('text-green-500');
-                setTimeout(() => {
-                    closeLoginModal();
-                    // Desktop view
-                    loginBtn.classList.add('hidden');
-                    welcomeMsg.textContent = `Chào, ${username}`;
-                    welcomeMsg.classList.remove('hidden');
-                    logoutBtn.classList.remove('hidden');
-                    // Mobile view
-                    mobileLoginBtn.classList.add('hidden');
-                    mobileWelcomeMsg.textContent = `Chào, ${username}`;
-                    mobileWelcomeMsg.classList.remove('hidden');
-                    mobileLogoutBtn.classList.remove('hidden');
-                }, 1000);
-            }
-
-            const handleLogout = () => {
-                 // Desktop view
-                welcomeMsg.classList.add('hidden');
-                logoutBtn.classList.add('hidden');
-                loginBtn.classList.remove('hidden');
-                 // Mobile view
-                mobileWelcomeMsg.classList.add('hidden');
-                mobileLogoutBtn.classList.add('hidden');
-                mobileLoginBtn.classList.remove('hidden');
-            }
-
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-
-                if (username === 'admin' && password === '123') {
-                    handleLoginSuccess(username);
+            const updateAdminUI = () => {
+                if (isAdmin) {
+                    adminControls.innerHTML = `<button id="add-product-trigger" class="bg-brand-blue text-white font-bold py-2 px-6 rounded-full"><i data-lucide="plus" class="inline-block w-5 h-5 -mt-1"></i> Thêm Sản Phẩm</button>`;
+                    document.getElementById('add-product-trigger').addEventListener('click', () => addProductModal.classList.remove('hidden'));
+                    lucide.createIcons();
                 } else {
-                    loginMessage.textContent = 'Tên đăng nhập hoặc mật khẩu không đúng.';
-                    loginMessage.classList.add('text-red-500');
-                    loginMessage.classList.remove('text-green-500');
+                    adminControls.innerHTML = '';
+                }
+                // Re-render products to show/hide admin buttons on them
+                const activeCategory = categoryFilterBar.querySelector('.category-tag.active').dataset.category;
+                const filtered = activeCategory === 'all' ? allProducts : allProducts.filter(p => p.category === activeCategory);
+                renderProducts(filtered);
+            };
+
+            const loadAndCombineProducts = async () => {
+                productGrid.innerHTML = `<p class="col-span-full text-center">Đang tải sản phẩm...</p>`;
+                try {
+                    const imageDocRef = doc(db, 'trang_suc', 'bc');
+                    const priceDocRef = doc(db, 'trang_suc', 'giaban');
+                    const [imageDocSnap, priceDocSnap] = await Promise.all([getDoc(imageDocRef), getDoc(priceDocRef)]);
+
+                    if (!imageDocSnap.exists() || !priceDocSnap.exists()) throw new Error("Dữ liệu sản phẩm không tồn tại.");
+
+                    const imageData = imageDocSnap.data();
+                    const priceData = priceDocSnap.data();
+                    
+                    allProducts = Object.keys(imageData).map(key => ({
+                        id: key,
+                        name: `Trang Sức Bạc ${key}`,
+                        price: Number(priceData[key] || 0),
+                        image: imageData[key],
+                        category: (parseInt(key) % 3 === 0) ? 'nam' : ((parseInt(key) % 3 === 1) ? 'nu' : 'tre-em')
+                    }));
+                    renderProducts(allProducts);
+                } catch (error) {
+                    productGrid.innerHTML = `<p class="col-span-full text-center text-red-600">Lỗi tải sản phẩm: ${error.message}</p>`;
+                }
+            };
+
+            const loadHeroImages = async () => {
+                try {
+                    const heroImagesRef = doc(db, 'bst', 'bts1');
+                    const docSnap = await getDoc(heroImagesRef);
+                    if (docSnap.exists()) {
+                        const imageData = docSnap.data();
+                        const heroSlides = document.querySelectorAll('#hero-slides-container .hero-slide img');
+                        
+                        if (imageData['1'] && heroSlides[0]) heroSlides[0].src = imageData['1'];
+                        if (imageData['2'] && heroSlides[1]) heroSlides[1].src = imageData['2'];
+                        if (imageData['3'] && heroSlides[2]) heroSlides[2].src = imageData['3'];
+
+                    } else {
+                        console.log("No hero image data found!");
+                    }
+                } catch (error) {
+                    console.error("Error loading hero images:", error);
+                }
+            };
+
+            // --- Cart Functions ---
+            const updateCartUI = () => {
+                const cartItemsContainer = document.getElementById('cart-items');
+                const cartCount = document.getElementById('cart-count');
+                const cartTotalEl = document.getElementById('cart-total');
+                
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center">Giỏ hàng của bạn đang trống.</p>';
+                } else {
+                    cartItemsContainer.innerHTML = cart.map(item => `
+                        <div class="flex items-center justify-between py-2 border-b">
+                            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
+                            <div class="flex-grow px-2">
+                                <p class="font-semibold text-sm">${item.name}</p>
+                                <p class="text-xs text-gray-600">${formatCurrency(item.price)}</p>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="cart-quantity-btn" data-id="${item.id}" data-change="-1">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="cart-quantity-btn" data-id="${item.id}" data-change="1">+</button>
+                                <button class="remove-from-cart-btn text-red-500" data-id="${item.id}"><i data-lucide="trash-2" class="w-4 h-4 pointer-events-none"></i></button>
+                            </div>
+                        </div>`).join('');
+                }
+                
+                const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+                const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                cartCount.textContent = totalQuantity;
+                cartTotalEl.textContent = formatCurrency(totalPrice);
+                lucide.createIcons();
+            };
+
+            const addToCart = (productId, button) => {
+                const product = allProducts.find(p => p.id === productId);
+                if (!product) return;
+                
+                const existingItem = cart.find(item => item.id === productId);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                updateCartUI();
+
+                if (button) {
+                    const originalText = 'Thêm vào giỏ';
+                    button.innerHTML = 'Đã thêm!';
+                    button.disabled = true;
+                    button.classList.add('bg-green-500', 'cursor-not-allowed');
+                    button.classList.remove('bg-brand-blue');
+
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                        button.classList.remove('bg-green-500', 'cursor-not-allowed');
+                        button.classList.add('bg-brand-blue');
+                    }, 1500);
+                }
+            };
+
+            // Initial Load for all users
+            loadAndCombineProducts();
+            loadHeroImages();
+            
+            // Handle Authentication State Changes
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const userDocRef = doc(db, 'checkid', user.uid);
+                    const docSnap = await getDoc(userDocRef);
+                    isAdmin = docSnap.exists() && docSnap.data().lon === 1;
+                    
+                    authSection.innerHTML = `<div class="flex items-center space-x-2"><span class="font-semibold text-sm text-brand-blue">${isAdmin ? '<i data-lucide="shield-check" class="inline-block text-yellow-500 w-4 h-4"></i> ' : ''} ${user.email}</span><button id="logout-button" class="text-xs bg-red-500 text-white py-1 px-2 rounded">Đăng xuất</button></div>`;
+                    document.getElementById('logout-button').addEventListener('click', () => signOut(auth));
+                    [loginModal, registerModal].forEach(m => m.classList.add('hidden'));
+                } else {
+                    isAdmin = false;
+                    authSection.innerHTML = `<button id="login-trigger-btn" class="font-semibold">Đăng nhập</button><span class="text-gray-400">|</span><button id="register-trigger-btn" class="font-semibold">Đăng ký</button>`;
+                    document.getElementById('login-trigger-btn').addEventListener('click', () => loginModal.classList.remove('hidden'));
+                    document.getElementById('register-trigger-btn').addEventListener('click', () => registerModal.classList.remove('hidden'));
+                }
+                lucide.createIcons();
+                updateAdminUI(); // Update UI based on admin status
+            });
+            
+            // --- Global Event Listeners ---
+            document.body.addEventListener('click', async (e) => {
+                const target = e.target;
+
+                // Cart interactions
+                if (target.closest('.add-to-cart-btn')) {
+                    const button = target.closest('.add-to-cart-btn');
+                    const productId = button.dataset.id;
+                    addToCart(productId, button);
+                }
+                if (target.closest('#cart-button')) {
+                    cartSidebar.classList.remove('translate-x-full');
+                    cartOverlay.classList.remove('hidden');
+                }
+                if (target.closest('#close-cart-button') || target.id === 'cart-overlay') {
+                    cartSidebar.classList.add('translate-x-full');
+                    cartOverlay.classList.add('hidden');
+                }
+                if (target.closest('.cart-quantity-btn')) {
+                    const { id, change } = target.closest('.cart-quantity-btn').dataset;
+                    const item = cart.find(i => i.id === id);
+                    if (item) {
+                        item.quantity += Number(change);
+                        if (item.quantity <= 0) {
+                            cart = cart.filter(i => i.id !== id);
+                        }
+                        updateCartUI();
+                    }
+                }
+                if (target.closest('.remove-from-cart-btn')) {
+                    const { id } = target.closest('.remove-from-cart-btn').dataset;
+                    cart = cart.filter(i => i.id !== id);
+                    updateCartUI();
+                }
+                if(target.closest('#checkout-button')) {
+                    if (cart.length === 0) return;
+
+                    // REQUIRE LOGIN BEFORE CHECKOUT
+                    if (!auth.currentUser) {
+                        cartSidebar.classList.add('translate-x-full');
+                        cartOverlay.classList.add('hidden');
+                        loginModal.classList.remove('hidden');
+                        document.getElementById('login-error-message').textContent = 'Vui lòng đăng nhập để thanh toán.';
+                        return;
+                    }
+
+                    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                    document.getElementById('payment-total').textContent = formatCurrency(isAdmin ? 0 : total);
+                    document.getElementById('payment-description').textContent = isAdmin ? 'Thanh toán 0đ - Đặc quyền Admin' : `${auth.currentUser.email.split('@')[0]} - ${new Date().toLocaleDateString('vi-VN')}`;
+                    paymentModal.classList.remove('hidden');
+                    cartSidebar.classList.add('translate-x-full');
+                    cartOverlay.classList.add('hidden');
+                }
+                
+                // Modal closing
+                if (target.closest('.close-modal-btn')) {
+                    target.closest('.fixed').classList.add('hidden');
+                }
+                
+                // Admin product deletion
+                if (isAdmin && target.closest('.delete-product-btn')) {
+                    const button = target.closest('.delete-product-btn');
+                    const productId = button.dataset.id;
+                    if (confirm(`Bạn có chắc muốn xóa sản phẩm ${productId} không?`)) {
+                        try {
+                            const imageDocRef = doc(db, 'trang_suc', 'bc');
+                            const priceDocRef = doc(db, 'trang_suc', 'giaban');
+                            await updateDoc(imageDocRef, { [productId]: deleteField() });
+                            await updateDoc(priceDocRef, { [productId]: deleteField() });
+                            await loadAndCombineProducts();
+                        } catch (error) {
+                            alert(`Lỗi khi xóa sản phẩm: ${error.message}`);
+                        }
+                    }
                 }
             });
 
-            logoutBtn.addEventListener('click', (e) => { e.preventDefault(); handleLogout(); });
-            mobileLogoutBtn.addEventListener('click', (e) => { e.preventDefault(); handleLogout(); });
+            categoryFilterBar.addEventListener('click', (e) => {
+                if (e.target.matches('.category-tag')) {
+                    categoryFilterBar.querySelectorAll('.category-tag').forEach(tag => tag.classList.remove('active'));
+                    e.target.classList.add('active');
+                    const category = e.target.dataset.category;
+                    const filtered = category === 'all' ? allProducts : allProducts.filter(p => p.category === category);
+                    renderProducts(filtered);
+                }
+            });
+
+            // --- Form Submissions ---
+            loginForm.addEventListener('submit', e => {
+                e.preventDefault();
+                document.getElementById('login-error-message').textContent = '';
+                signInWithEmailAndPassword(auth, loginForm['login-email'].value, loginForm['login-password'].value)
+                    .catch(err => document.getElementById('login-error-message').textContent = 'Sai thông tin đăng nhập.');
+            });
+
+            registerForm.addEventListener('submit', e => {
+                e.preventDefault();
+                createUserWithEmailAndPassword(auth, registerForm['register-email'].value, registerForm['register-password'].value)
+                    .catch(err => document.getElementById('register-error-message').textContent = 'Email đã tồn tại hoặc không hợp lệ.');
+            });
+
+            addProductForm.addEventListener('submit', async e => {
+                e.preventDefault();
+                const imageUrl = addProductForm['add-product-image'].value;
+                const price = Number(addProductForm['add-product-price'].value);
+                if (!imageUrl || !price || price <= 0) {
+                    document.getElementById('add-product-error').textContent = 'Vui lòng nhập thông tin hợp lệ.'; return;
+                }
+                try {
+                    const imageDocRef = doc(db, 'trang_suc', 'bc');
+                    const priceDocRef = doc(db, 'trang_suc', 'giaban');
+                    const imageDocSnap = await getDoc(imageDocRef);
+                    const currentKeys = imageDocSnap.exists() ? Object.keys(imageDocSnap.data()).map(Number) : [0];
+                    const nextKey = (Math.max(...currentKeys) + 1).toString();
+                    await updateDoc(imageDocRef, { [nextKey]: imageUrl });
+                    await updateDoc(priceDocRef, { [nextKey]: price });
+                    addProductForm.reset();
+                    addProductModal.classList.add('hidden');
+                    await loadAndCombineProducts();
+                } catch (error) {
+                    document.getElementById('add-product-error').textContent = `Lỗi: ${error.message}`;
+                }
+            });
+            
+            const createProductCardHTML = (product) => `
+                <div class="product-card group text-center relative">
+                    ${isAdmin ? `<button class="delete-product-btn absolute top-2 right-2 bg-red-500 text-white rounded-full p-1.5 z-10 hover:bg-red-700" data-id="${product.id}"><i data-lucide="trash-2" class="w-4 h-4 pointer-events-none"></i></button>` : ''}
+                    <div class="relative overflow-hidden rounded-lg bg-gray-100 aspect-[3/4]">
+                        <img src="${product.image}" alt="${product.name}" class="product-image w-full h-full object-cover">
+                    </div>
+                    <h3 class="mt-4 text-base font-semibold text-brand-blue">${product.name}</h3>
+                    <p class="text-gray-600">${formatCurrency(product.price)}</p>
+                    <button class="add-to-cart-btn mt-2 bg-brand-blue text-white text-sm font-semibold py-2 px-4 rounded-full" data-id="${product.id}">
+                        Thêm vào giỏ
+                    </button>
+                </div>`;
         });
     </script>
 </body>
 </html>
+
