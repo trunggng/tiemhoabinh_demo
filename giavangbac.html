@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Giá Bạc & Biểu Đồ - Hòa Bình Jewelry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --brand-blue: #005f73;
+            --brand-gold: #c5b358;
+            --brand-light: #F7FAFC;
+        }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--brand-light);
+            scroll-behavior: smooth;
+        }
+        .text-brand-blue { color: var(--brand-blue); }
+        .bg-brand-blue { background-color: var(--brand-blue); }
+        .border-brand-blue { border-color: var(--brand-blue); }
+        .text-brand-gold { color: var(--brand-gold); }
+        .border-brand-gold { border-color: var(--brand-gold); }
+        .bg-brand-gold { background-color: var(--brand-gold); }
+        .bg-brand-light { background-color: var(--brand-light); }
+
+        .hover-nav:hover { color: var(--brand-gold); transition: color 0.3s ease; }
+        
+        .megamenu { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, transform 0.3s ease; transform: translateY(10px); }
+        .group:hover .megamenu { opacity: 1; visibility: visible; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-brand-light">
+
+    <!-- Header - Reused from homepage for consistency -->
+    <header class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-2 border-b border-brand-blue/10 text-xs text-brand-blue">
+                <p>Hotline: <a href="tel:0943120069" class="hover-nav font-semibold">0943120069</a></p>
+                <p class="hidden md:block">Địa chỉ: 42 Chiêu Anh Các, P5, Q5, TPHCM</p>
+            </div>
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-3xl font-bold text-brand-blue tracking-wider">HÒA BÌNH</a>
+
+                <nav class="hidden lg:flex items-center space-x-8 text-brand-blue font-semibold">
+                    <div class="relative group">
+                        <button class="hover-nav flex items-center">Trang Sức<i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i></button>
+                         <div class="megamenu absolute top-full left-1/2 -translate-x-1/2 w-screen max-w-4xl bg-white shadow-lg rounded-b-lg p-8 z-20">
+                           <div class="grid grid-cols-4 gap-8">
+                                <div class="space-y-4">
+                                    <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Nữ</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Dây chuyền</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Nhẫn</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Bông tai</a></li>
+                                    </ul>
+                                </div>
+                                <div class="space-y-4">
+                                     <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Nam</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Dây chuyền</a></li>
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Nhẫn</a></li>
+                                    </ul>
+                                </div>
+                               <div class="space-y-4">
+                                     <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Trẻ Em</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Lắc tay & Lắc chân</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-span-1">
+                                    <a href="#" class="block rounded-lg overflow-hidden group/img">
+                                        <img src="https://placehold.co/400x400/005f73/ffffff?text=BST+Mới" alt="New Collection" class="w-full h-full object-cover transition-transform duration-300 group-hover/img:scale-105">
+                                    </a>
+                                </div>
+                           </div>
+                        </div>
+                    </div>
+			<a href="index.html#bo-suu-tap" class="hover-nav">TRANG CHỦ</a>
+                    <a href="index.html#bo-suu-tap" class="hover-nav">Bộ Sưu Tập</a>
+                    <a href="index.html#ve-hoa-binh" class="hover-nav">Về chúng tôi</a>
+                    <a href="gia-vang.html" class="hover-nav text-brand-gold font-bold">Giá Bạc</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="#" id="cart-button" class="text-brand-blue hover-nav relative"><i data-lucide="shopping-cart" class="w-6 h-6"></i><span class="absolute -top-2 -right-2 bg-brand-gold text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span></a>
+                    <button id="mobile-menu-button" class="lg:hidden text-brand-blue"><i data-lucide="menu" class="w-6 h-6"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-5xl mx-auto">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-brand-blue">Biểu Đồ & Bảng Giá Bạc Hôm Nay</h1>
+                    <p id="update-time" class="text-gray-500 mt-2">Biểu đồ giá quốc tế (XAG/USD) theo thời gian thực</p>
+                </div>
+
+                <!-- TradingView Chart -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-brand-blue mb-4 flex items-center gap-3"><i data-lucide="trending-up" class="w-6 h-6"></i> Biểu Đồ Giá Bạc Thế Giới</h2>
+                    <div class="tradingview-widget-container h-[450px]">
+                        <div id="tradingview_chart" class="h-full w-full"></div>
+                    </div>
+                </div>
+
+                <!-- Silver Price Table -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-600 mb-4 flex items-center gap-3"><i data-lucide="sparkles" class="w-6 h-6"></i> Bảng Giá Bạc Bán Lẻ (Tham Khảo)</h2>
+                     <div class="overflow-x-auto rounded-lg border">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-100 text-sm uppercase font-semibold text-brand-blue">
+                                <tr>
+                                    <th class="py-3 px-4">Loại Bạc</th>
+                                    <th class="py-3 px-4 text-right">Giá Mua vào (VND/chỉ)</th>
+                                    <th class="py-3 px-4 text-right">Giá Bán ra (VND/chỉ)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="silver-price-body" class="divide-y">
+                                <!-- JS will populate this -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8 text-sm text-gray-500 italic">
+                    <p>** Lưu ý: Biểu đồ thể hiện giá bạc quốc tế. Bảng giá bán lẻ chỉ mang tính chất tham khảo, giá thực tế có thể thay đổi tùy thuộc vào thời điểm và biến động của thị trường.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - Reused from homepage for consistency -->
+    <footer class="bg-brand-blue text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold text-brand-gold mb-4">HÒA BÌNH JEWELRY</h4>
+                    <p class="text-gray-300">Nơi vẻ đẹp và sự tinh tế được tôn vinh.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Chăm Sóc Khách Hàng</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-brand-gold">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#" class="hover:text-brand-gold">Chính sách đổi trả</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Thông Tin Liên Hệ</h4>
+                     <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start"><i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-1"></i>42 Chiêu Anh Các, P5, Q5, TPHCM</li>
+                        <li class="flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-2"></i>0943120069</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Đăng Ký Nhận Tin</h4>
+                    <div class="flex"><input type="email" placeholder="Email của bạn" class="w-full rounded-l-md p-2 text-gray-800 focus:outline-none"><button class="bg-brand-gold text-white font-semibold px-4 rounded-r-md">Đăng Ký</button></div>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 pt-6 text-center text-gray-400 text-sm"><p>&copy; 2025 Hòa Bình Jewelry. All rights reserved.</p></div>
+        </div>
+    </footer>
+    
+    <!-- TradingView Script -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            const silverPriceBody = document.getElementById('silver-price-body');
+
+            // --- TRADINGVIEW CHART INITIALIZATION ---
+            new TradingView.widget({
+                "autosize": true,
+                "symbol": "OANDA:XAGUSD", // Silver vs US Dollar
+                "interval": "D",
+                "timezone": "Asia/Ho_Chi_Minh",
+                "theme": "light",
+                "style": "1",
+                "locale": "vi_VN",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "allow_symbol_change": true,
+                "container_id": "tradingview_chart"
+            });
+            
+            // --- STATIC SILVER PRICES ---
+            const silverPrices = [
+                { type: 'Bạc 99.9%', buy: 200000, sell: 208000 },
+                { type: 'Bạc trang sức 92.5%', buy: 190000, sell: 198000 },
+                { type: 'Bạc ta (nguyên chất)', buy: 198000, sell: 205000 },
+            ];
+
+            function displaySilverPrices() {
+                silverPriceBody.innerHTML = silverPrices.map(item => `
+                     <tr class="hover:bg-gray-50">
+                        <td class="py-3 px-4 font-semibold">${item.type}</td>
+                        <td class="py-3 px-4 text-right font-medium text-green-600">${new Intl.NumberFormat('vi-VN').format(item.buy)}</td>
+                        <td class="py-3 px-4 text-right font-medium text-red-600">${new Intl.NumberFormat('vi-VN').format(item.sell)}</td>
+                    </tr>
+                `).join('');
+            }
+            
+            // Initial call
+            displaySilverPrices();
+        });
+    </script>
+</body>
+</html>
+

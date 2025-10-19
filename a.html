@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hòa Bình Jewelry - Trang Sức Bạc Cao Cấp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .text-brand-blue { color: #005f73; }
+        .bg-brand-blue { background-color: #005f73; }
+        .border-brand-blue { border-color: #005f73; }
+        .text-brand-gold { color: #c5b358; }
+        .border-brand-gold { border-color: #c5b358; }
+        .bg-brand-gold { background-color: #c5b358; }
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        .product-image {
+            transition: transform 0.3s ease-in-out;
+        }
+        .header-bg {
+            background-image: url('https://placehold.co/1920x200/e0f7fa/005f73?text=KHAI+TRƯƠNG+HÒA+BÌNH+BẠC&font=quicksand');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+     <header class="header-bg shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 bg-white/90 backdrop-blur-sm">
+             <div class="flex justify-between items-center py-2 border-b border-brand-blue/20 text-xs text-brand-blue px-4">
+                <p>Hotline: <a href="tel:0943120069" class="hover:text-brand-gold font-semibold">0943120069</a></p>
+                <p>Địa chỉ: 42 Chiêu Anh Các, P5, Q5, TPHCM</p>
+            </div>
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-2xl md:text-3xl font-bold text-brand-blue tracking-wider">
+                    HÒA BÌNH
+                </a>
+                 <nav class="hidden lg:flex items-center space-x-8 text-brand-blue font-semibold">
+                    <a href="index.html" class="hover:text-brand-gold">Trang Chủ</a>
+                    <a href="#" class="hover:text-brand-gold">Bộ Sưu Tập</a>
+                    <a href="#" class="hover:text-brand-gold">Về chúng tôi</a>
+                </nav>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    <div class="relative hidden md:block">
+                         <input type="text" id="search-input" placeholder="Tìm kiếm..." class="border bg-white/80 border-gray-300 rounded-full py-1.5 px-4 w-32 md:w-48 focus:outline-none focus:border-brand-gold text-gray-800 placeholder-gray-500">
+                         <i data-lucide="search" class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                    </div>
+                     <div id="auth-section" class="flex items-center space-x-2 text-sm">
+                        <!-- Auth buttons injected here -->
+                    </div>
+                    <button id="cart-button" class="text-brand-blue hover:text-brand-gold relative">
+                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-gold text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 lg:p-6 min-h-screen">
+        <div class="mb-6 bg-white p-4 rounded-lg shadow-sm">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <!-- Filters -->
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                    <span class="font-bold text-brand-blue hidden md:block">Bộ lọc:</span>
+                    <div class="relative">
+                        <select id="main-category-filter" class="appearance-none bg-gray-100 border border-gray-300 rounded-md py-2 px-4 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold">
+                            <option value="all">Tất cả danh mục</option>
+                            <option value="nu">Trang Sức Nữ</option>
+                            <option value="nam">Trang Sức Nam</option>
+                            <option value="tre-em">Trang Sức Trẻ Em</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                    </div>
+                     <div class="relative">
+                        <select id="sub-category-filter" class="appearance-none bg-gray-100 border border-gray-300 rounded-md py-2 px-4 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold">
+                           <option value="all">Tất cả loại</option>
+                           <option value="nhan">Nhẫn</option>
+                           <option value="bong-tai">Bông tai</option>
+                           <option value="vong">Vòng / Lắc</option>
+                           <option value="mat-day-chuyen">Mặt dây chuyền</option>
+                           <option value="khac">Khác</option>
+                        </select>
+                         <i data-lucide="chevron-down" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                    </div>
+                    <div class="flex items-center gap-2">
+                         <input type="number" id="min-price" placeholder="Giá từ" class="w-28 border-gray-300 rounded-md p-2 text-sm">
+                         <span class="text-gray-500">-</span>
+                         <input type="number" id="max-price" placeholder="Giá đến" class="w-28 border-gray-300 rounded-md p-2 text-sm">
+                         <button id="apply-price-filter" class="bg-brand-blue text-white px-3 py-2 rounded-md text-sm hover:bg-opacity-90">Áp dụng</button>
+                    </div>
+                </div>
+                <!-- Sorting -->
+                <div class="flex items-center gap-2">
+                    <span class="font-bold text-brand-blue">Sắp xếp:</span>
+                    <div class="relative">
+                        <select id="sort-by" class="appearance-none bg-gray-100 border border-gray-300 rounded-md py-2 px-4 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold">
+                            <option value="default">Mới nhất</option>
+                            <option value="price_asc">Giá tăng dần</option>
+                            <option value="price_desc">Giá giảm dần</option>
+                        </select>
+                         <i data-lucide="chevron-down" class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                    </div>
+                </div>
+            </div>
+             <div id="active-filters-display" class="mt-4 flex flex-wrap gap-2 items-center text-sm"></div>
+        </div>
+        
+        <div id="admin-controls" class="mb-6"></div>
+
+        <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
+            <!-- Products dynamically injected here -->
+        </div>
+        <div id="load-more-container" class="text-center mt-12 hidden">
+            <button id="load-more-btn" class="bg-brand-gold text-white font-semibold py-3 px-10 rounded-full hover:bg-opacity-90 transition-colors">
+                Xem thêm
+            </button>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-brand-blue text-white pt-12 md:pt-16 pb-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-center md:text-left">
+                <div class="md:col-span-1">
+                    <h4 class="text-lg md:text-xl font-bold text-brand-gold mb-4">HÒA BÌNH JEWELRY</h4>
+                    <p class="text-gray-300 text-sm">Nơi vẻ đẹp và sự tinh tế được tôn vinh.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-base md:text-lg mb-4">Chăm Sóc Khách Hàng</h4>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li><a href="#" class="hover:text-brand-gold">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#" class="hover:text-brand-gold">Chính sách đổi trả</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-base md:text-lg mb-4">Thông Tin Liên Hệ</h4>
+                     <ul class="space-y-2 text-gray-300 text-sm">
+                        <li class="flex items-center justify-center md:justify-start"><i data-lucide="map-pin" class="w-4 h-4 mr-2 flex-shrink-0"></i>42 Chiêu Anh Các, P5, Q5, TPHCM</li>
+                        <li class="flex items-center justify-center md:justify-start"><i data-lucide="phone" class="w-4 h-4 mr-2 flex-shrink-0"></i>0949720069</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-base md:text-lg mb-4">Đăng Ký Nhận Tin</h4>
+                    <div class="flex max-w-sm mx-auto md:mx-0">
+                        <input type="email" placeholder="Email của bạn" class="w-full rounded-l-md p-2 text-gray-800 text-sm focus:outline-none">
+                        <button class="bg-brand-gold text-white font-semibold px-4 rounded-r-md text-sm">Đăng Ký</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2025 Hòa Bình Jewelry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Modals -->
+    <div id="add-product-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[101] hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-8 relative">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 close-modal-btn"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <h2 class="text-2xl font-bold text-center text-brand-blue mb-6">Thêm Sản Phẩm Mới</h2>
+            <form id="add-product-form">
+                 <div class="mb-4">
+                    <label for="add-product-name" class="block text-sm font-medium text-gray-700 mb-1">Tên Sản phẩm</label>
+                    <input type="text" id="add-product-name" placeholder="Vd: Nhẫn Bạc Nữ Tinh Tế" class="w-full px-4 py-2 border rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="add-main-category" class="block text-sm font-medium text-gray-700 mb-1">Danh mục chính</label>
+                    <select id="add-main-category" class="w-full px-4 py-2 border rounded-md" required>
+                        <option value="N1">Nữ</option>
+                        <option value="N2">Nam</option>
+                        <option value="T">Trẻ em</option>
+                    </select>
+                </div>
+                 <div class="mb-4">
+                    <label for="add-sub-category" class="block text-sm font-medium text-gray-700 mb-1">Loại trang sức</label>
+                    <select id="add-sub-category" class="w-full px-4 py-2 border rounded-md" required>
+                        <option value="N">Nhẫn</option>
+                        <option value="B">Bông tai</option>
+                        <option value="V">Vòng / Lắc</option>
+                        <option value="M">Mặt dây chuyền</option>
+                        <option value="K">Khác</option>
+                    </select>
+                </div>
+                <input type="url" id="add-product-image" placeholder="URL Hình ảnh" class="w-full px-4 py-2 border rounded-md mb-4" required>
+                <input type="number" id="add-product-price" placeholder="Giá (VND)" class="w-full px-4 py-2 border rounded-md mb-6" required>
+                <p id="add-product-error" class="text-red-500 text-sm mb-4 text-center"></p>
+                <button type="submit" class="w-full bg-brand-blue text-white font-bold py-2 rounded-md">Thêm Sản Phẩm</button>
+            </form>
+        </div>
+    </div>
+     <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[101] hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-sm p-8 relative">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 close-modal-btn"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <h2 class="text-2xl font-bold text-center text-brand-blue mb-6">Đăng Nhập</h2>
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Email" class="w-full px-4 py-2 border rounded-md mb-4" required>
+                <input type="password" id="login-password" placeholder="Mật khẩu" class="w-full px-4 py-2 border rounded-md mb-6" required>
+                <p id="login-error-message" class="text-red-500 text-sm mb-4 text-center"></p>
+                <button type="submit" class="w-full bg-brand-blue text-white font-bold py-2 rounded-md">Đăng Nhập</button>
+            </form>
+        </div>
+    </div>
+    <div id="register-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[101] hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-sm p-8 relative">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 close-modal-btn"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <h2 class="text-2xl font-bold text-center text-brand-blue mb-6">Đăng Ký</h2>
+            <form id="register-form">
+                <input type="email" id="register-email" placeholder="Email" class="w-full px-4 py-2 border rounded-md mb-4" required>
+                <input type="password" id="register-password" placeholder="Mật khẩu" class="w-full px-4 py-2 border rounded-md mb-6" required>
+                <p id="register-error-message" class="text-red-500 text-sm mb-4 text-center"></p>
+                <button type="submit" class="w-full bg-brand-blue text-white font-bold py-2 rounded-md">Đăng Ký</button>
+            </form>
+        </div>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-[98] hidden"></div>
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-[99] transform translate-x-full flex flex-col">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h2 class="text-xl font-bold text-brand-blue">Giỏ Hàng Của Bạn</h2>
+            <button id="close-cart-button" class="text-gray-500 hover:text-gray-800">
+                <i data-lucide="x" class="w-6 h-6 pointer-events-none"></i>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-grow p-4 overflow-y-auto"></div>
+        <div class="p-4 border-t bg-gray-50">
+            <div class="flex justify-between items-center font-bold text-lg mb-4">
+                <span>Tổng cộng:</span>
+                <span id="cart-total" class="text-brand-blue">0₫</span>
+            </div>
+            <button id="checkout-button" class="w-full bg-brand-gold text-white font-bold py-3 rounded-lg hover:bg-opacity-90">
+                Tiến Hành Thanh Toán
+            </button>
+        </div>
+    </div>
+    <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[101] hidden">
+         <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-8 relative text-center">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 close-modal-btn">
+                <i data-lucide="x" class="w-6 h-6 pointer-events-none"></i>
+            </button>
+            <h2 class="text-2xl font-bold text-center text-brand-blue mb-4">Thanh Toán Đơn Hàng</h2>
+            <img src="https://placehold.co/300x300/e2e8f0/333333?text=QR+Code" alt="QR Code" class="mx-auto rounded-lg">
+            <div class="mt-4 text-left bg-gray-50 p-4 rounded-lg">
+                 <p class="text-gray-700 mt-2"><span class="font-semibold">Số tiền:</span> <strong id="payment-total" class="text-red-600"></strong></p>
+                 <p class="text-gray-700 mt-2 font-semibold">Nội dung chuyển khoản:</p>
+                 <p id="payment-description" class="text-brand-blue font-bold text-center mt-1 p-2 bg-gray-200 rounded"></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, updateDoc, deleteField, setDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOEOfs3nXbaPR1OWsdbVlIgKKjoIh27N8",
+            authDomain: "kimhoanhoabinh.firebaseapp.com",
+            projectId: "kimhoanhoabinh",
+            storageBucket: "kimhoanhoabinh.appspot.com",
+            messagingSenderId: "632319260444",
+            appId: "1:632319260444:web:27c21be148b02b601a6cd9",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            
+            // State variables
+            let isAdmin = false;
+            let allProducts = [];
+            let displayedProducts = [];
+            let currentFilters = { main: 'all', sub: 'all', minPrice: null, maxPrice: null };
+            let currentSort = 'default';
+            let displayedCount = 8;
+            const productsPerPage = 8;
+            let cart = [];
+
+            // DOM Elements Cache
+            const DOM = {
+                authSection: document.getElementById('auth-section'),
+                loginModal: document.getElementById('login-modal'),
+                registerModal: document.getElementById('register-modal'),
+                addProductModal: document.getElementById('add-product-modal'),
+                productGrid: document.getElementById('product-grid'),
+                adminControls: document.getElementById('admin-controls'),
+                mainCategoryFilter: document.getElementById('main-category-filter'),
+                subCategoryFilter: document.getElementById('sub-category-filter'),
+                sortBy: document.getElementById('sort-by'),
+                minPriceInput: document.getElementById('min-price'),
+                maxPriceInput: document.getElementById('max-price'),
+                applyPriceFilterBtn: document.getElementById('apply-price-filter'),
+                activeFiltersDisplay: document.getElementById('active-filters-display'),
+                cartSidebar: document.getElementById('cart-sidebar'),
+                cartOverlay: document.getElementById('cart-overlay'),
+                loadMoreContainer: document.getElementById('load-more-container'),
+                loadMoreBtn: document.getElementById('load-more-btn'),
+            };
+
+            // Utility Functions
+            const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+            
+            const DATA_STRUCTURE = {
+                'N1': { name: 'nu', subs: { 'N': 'nhan', 'B': 'bong-tai', 'V': 'vong', 'M': 'mat-day-chuyen', 'K': 'khac' } },
+                'N2': { name: 'nam', subs: { 'N': 'nhan', 'V': 'vong', 'M': 'mat-day-chuyen', 'K': 'khac' } },
+                'T': { name: 'tre-em', subs: { 'N': 'nhan', 'B': 'bong-tai', 'V': 'vong', 'K': 'khac' } }
+            };
+
+            // --- Core Data & Rendering Logic ---
+
+            /**
+             * Fetches all product data from Firestore based on the defined structure.
+             * This function is called once on page load.
+             */
+            const loadAllProducts = async () => {
+                DOM.productGrid.innerHTML = `<p class="col-span-full text-center">Đang tải sản phẩm...</p>`;
+                let tempProducts = [];
+                try {
+                    const docRefs = [doc(db, 'TS', 'N1'), doc(db, 'TS', 'N2'), doc(db, 'TS', 'T')];
+                    const docSnaps = await Promise.all(docRefs.map(ref => getDoc(ref)));
+                    
+                    docSnaps.forEach(docSnap => {
+                        if (docSnap.exists()) {
+                            const docData = docSnap.data();
+                            const mainCatKey = docSnap.id; 
+                            const mainCatInfo = DATA_STRUCTURE[mainCatKey];
+
+                            if (mainCatInfo) {
+                                for (const fieldKey in docData) {
+                                    const subCatKey = fieldKey.split('_')[1];
+                                    const subCatName = mainCatInfo.subs[subCatKey];
+                                    const productsMap = docData[fieldKey];
+                                    
+                                    if (subCatName && typeof productsMap === 'object') {
+                                        for (const prodKey in productsMap) {
+                                            const productData = productsMap[prodKey];
+                                            tempProducts.push({
+                                                id: `${fieldKey}-${prodKey}`, originalId: prodKey, name: productData.name, price: productData.price, image: productData.image, mainCategory: mainCatInfo.name, subCategory: subCatName,
+                                                firestorePath: { collection: 'TS', document: mainCatKey, field: fieldKey }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    allProducts = tempProducts;
+                    filterAndDisplayProducts(); // Initial render after fetching
+                } catch (error) {
+                    console.error("Error loading products:", error);
+                    DOM.productGrid.innerHTML = `<p class="col-span-full text-center text-red-600">Lỗi tải sản phẩm. Vui lòng thử lại.</p>`;
+                }
+            };
+            
+            /**
+             * Applies filters and sorting, then triggers a re-render.
+             */
+            const filterAndDisplayProducts = () => {
+                let filtered = [...allProducts];
+
+                // Apply filters
+                if (currentFilters.main !== 'all') filtered = filtered.filter(p => p.mainCategory === currentFilters.main);
+                if (currentFilters.sub !== 'all') filtered = filtered.filter(p => p.subCategory === currentFilters.sub);
+                if (currentFilters.minPrice) filtered = filtered.filter(p => p.price >= currentFilters.minPrice);
+                if (currentFilters.maxPrice) filtered = filtered.filter(p => p.price <= currentFilters.maxPrice);
+
+                // Apply sorting
+                if(currentSort === 'price_asc') filtered.sort((a, b) => a.price - b.price);
+                else if (currentSort === 'price_desc') filtered.sort((a, b) => b.price - a.price);
+                
+                displayedProducts = filtered;
+                displayedCount = productsPerPage; // Reset count for new filter
+                renderProductPage();
+                updateActiveFiltersDisplay();
+            };
+
+            /**
+             * Renders the current page of products and manages the "Load More" button.
+             */
+            const renderProductPage = () => {
+                const productsToDisplay = displayedProducts.slice(0, displayedCount);
+                if (productsToDisplay.length === 0) {
+                     DOM.productGrid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">Không có sản phẩm nào phù hợp.</p>`;
+                } else {
+                    DOM.productGrid.innerHTML = productsToDisplay.map(createProductCardHTML).join('');
+                }
+                lucide.createIcons();
+                DOM.loadMoreContainer.classList.toggle('hidden', displayedCount >= displayedProducts.length);
+            };
+
+            // --- UI Update Functions ---
+            
+            const updateAdminUI = () => {
+                DOM.adminControls.innerHTML = isAdmin ? `<button id="add-product-trigger" class="bg-brand-blue text-white font-bold py-2 px-6 rounded-lg flex items-center justify-center mx-auto"><i data-lucide="plus" class="w-5 h-5 mr-2"></i> Thêm Sản Phẩm Mới</button>` : '';
+                if(isAdmin) {
+                    document.getElementById('add-product-trigger').addEventListener('click', () => DOM.addProductModal.classList.remove('hidden'));
+                    lucide.createIcons();
+                }
+                filterAndDisplayProducts();
+            };
+
+            const updateAuthUI = (user) => {
+                const loggedInHTML = (email) => `<div class="flex items-center space-x-2"><span class="font-semibold text-sm text-brand-blue">${isAdmin ? '<i data-lucide="shield-check" class="inline-block text-yellow-500 w-4 h-4"></i> ' : ''} ${email}</span><button class="auth-logout text-xs bg-red-500 text-white py-1 px-2 rounded">Đăng xuất</button></div>`;
+                const loggedOutHTML = () => `<button class="auth-login font-semibold">Đăng nhập</button><span class="text-gray-400">|</span><button class="auth-register font-semibold">Đăng ký</button>`;
+                DOM.authSection.innerHTML = user ? loggedInHTML(user.email) : loggedOutHTML();
+                 document.querySelectorAll('.auth-login').forEach(btn => btn.addEventListener('click', () => DOM.loginModal.classList.remove('hidden')));
+                document.querySelectorAll('.auth-register').forEach(btn => btn.addEventListener('click', () => DOM.registerModal.classList.remove('hidden')));
+                document.querySelectorAll('.auth-logout').forEach(btn => btn.addEventListener('click', () => signOut(auth)));
+            };
+            
+            const updateActiveFiltersDisplay = () => {
+                DOM.activeFiltersDisplay.innerHTML = '';
+                let hasFilters = false;
+                
+                const createTag = (text, type) => {
+                    hasFilters = true;
+                    return `<span class="active-filter-tag bg-blue-100 text-blue-800 px-2 py-1 rounded-full flex items-center">${text} <button data-filter-type="${type}" class="ml-1 font-bold hover:text-red-500">&times;</button></span>`;
+                }
+
+                if (currentFilters.main !== 'all') {
+                    const text = DOM.mainCategoryFilter.querySelector(`option[value="${currentFilters.main}"]`).textContent;
+                    DOM.activeFiltersDisplay.innerHTML += createTag(text, 'main');
+                }
+                if (currentFilters.sub !== 'all') {
+                    const text = DOM.subCategoryFilter.querySelector(`option[value="${currentFilters.sub}"]`).textContent;
+                    DOM.activeFiltersDisplay.innerHTML += createTag(text, 'sub');
+                }
+                if (currentFilters.minPrice || currentFilters.maxPrice) {
+                    const min = currentFilters.minPrice ? formatCurrency(currentFilters.minPrice) : '0đ';
+                    const max = currentFilters.maxPrice ? formatCurrency(currentFilters.maxPrice) : '∞';
+                    DOM.activeFiltersDisplay.innerHTML += createTag(`Giá: ${min} - ${max}`, 'price');
+                }
+
+                if(hasFilters) {
+                     DOM.activeFiltersDisplay.innerHTML = `<span class="font-semibold mr-2">Đang lọc theo:</span>` + DOM.activeFiltersDisplay.innerHTML + `<button id="clear-all-filters" class="text-red-500 font-semibold ml-2 text-xs">Xóa tất cả</button>`;
+                }
+            };
+
+            const updateCartUI = () => { /* ... existing ... */ };
+            const addToCart = (productId, button) => { /* ... existing ... */ };
+
+            // --- Event Handling ---
+            
+            document.body.addEventListener('click', async (e) => {
+                const target = e.target;
+                if (target.closest('.close-modal-btn')) target.closest('.fixed').classList.add('hidden');
+                
+                if(target.id === 'clear-all-filters') {
+                    currentFilters = { main: 'all', sub: 'all', minPrice: null, maxPrice: null };
+                    DOM.mainCategoryFilter.value = 'all';
+                    DOM.subCategoryFilter.value = 'all';
+                    DOM.minPriceInput.value = '';
+                    DOM.maxPriceInput.value = '';
+                    filterAndDisplayProducts();
+                }
+
+                const filterRemoveBtn = target.closest('.active-filter-tag button');
+                if(filterRemoveBtn){
+                    const type = filterRemoveBtn.dataset.filterType;
+                    if(type === 'main') { currentFilters.main = 'all'; DOM.mainCategoryFilter.value = 'all';}
+                    if(type === 'sub') { currentFilters.sub = 'all'; DOM.subCategoryFilter.value = 'all';}
+                    if(type === 'price') { currentFilters.minPrice = null; currentFilters.maxPrice = null; DOM.minPriceInput.value = ''; DOM.maxPriceInput.value = '';}
+                    filterAndDisplayProducts();
+                }
+                
+                if (isAdmin && target.closest('.delete-product-btn')) {
+                    const productId = target.closest('.delete-product-btn').dataset.id;
+                    const product = allProducts.find(p => p.id === productId);
+                    if (product && confirm(`Xóa "${product.name}"?`)) {
+                        try {
+                            const { collection, document: docId, field } = product.firestorePath;
+                            const docRef = doc(db, collection, docId);
+                            const fieldPath = `${field}.${product.originalId}`;
+                            await updateDoc(docRef, { [fieldPath]: deleteField() });
+                            await loadAllProducts();
+                        } catch (error) { alert(`Lỗi: ${error.message}`); }
+                    }
+                }
+            });
+            
+            [DOM.mainCategoryFilter, DOM.subCategoryFilter, DOM.sortBy].forEach(el => {
+                el.addEventListener('change', () => {
+                    currentFilters.main = DOM.mainCategoryFilter.value;
+                    currentFilters.sub = DOM.subCategoryFilter.value;
+                    currentSort = DOM.sortBy.value;
+                    filterAndDisplayProducts();
+                });
+            });
+            DOM.applyPriceFilterBtn.addEventListener('click', () => {
+                currentFilters.minPrice = DOM.minPriceInput.value ? Number(DOM.minPriceInput.value) : null;
+                currentFilters.maxPrice = DOM.maxPriceInput.value ? Number(DOM.maxPriceInput.value) : null;
+                filterAndDisplayProducts();
+            });
+            DOM.loadMoreBtn.addEventListener('click', () => { displayedCount += productsPerPage; renderProductPage(); });
+            
+            // --- Form Submissions & HTML Templates ---
+
+            document.getElementById('add-product-form').addEventListener('submit', async e => {
+                e.preventDefault();
+                const form = e.target;
+                const mainCat = form['add-main-category'].value;
+                const subCat = form['add-sub-category'].value;
+                const fieldName = `${mainCat}_${subCat}`;
+                
+                const newProduct = {
+                    image: form['add-product-image'].value,
+                    price: Number(form['add-product-price'].value),
+                    name: form['add-product-name'].value
+                };
+
+                try {
+                    const docRef = doc(db, "TS", mainCat);
+                    const docSnap = await getDoc(docRef);
+                    let nextKey = 1;
+                    if (docSnap.exists() && docSnap.data()[fieldName]) {
+                        const productsMap = docSnap.data()[fieldName];
+                        const keys = Object.keys(productsMap).map(Number);
+                        if (keys.length > 0) nextKey = Math.max(...keys) + 1;
+                    }
+                    
+                    const fieldPath = `${fieldName}.${nextKey}`;
+                    await setDoc(docRef, { [fieldName]: { [nextKey.toString()]: newProduct } }, { merge: true });
+
+                    form.reset();
+                    DOM.addProductModal.classList.add('hidden');
+                    await loadAllProducts();
+                } catch (error) {
+                    document.getElementById('add-product-error').textContent = `Lỗi: ${error.message}`;
+                }
+            });
+
+            const createProductCardHTML = (product) => `
+                <div class="product-card group text-center relative bg-white p-2 rounded-lg shadow-sm">
+                     ${isAdmin ? `<button class="delete-product-btn absolute top-2 right-2 bg-red-500 text-white rounded-full p-1.5 z-10 hover:bg-red-700" data-id="${product.id}"><i data-lucide="trash-2" class="w-4 h-4 pointer-events-none"></i></button>` : ''}
+                    <div class="relative overflow-hidden rounded-lg bg-gray-100 aspect-[3/4]">
+                        <img src="${product.image}" alt="${product.name}" class="product-image w-full h-full object-cover">
+                    </div>
+                    <h3 class="mt-2 text-sm md:text-base font-semibold text-brand-blue truncate px-1">${product.name}</h3>
+                    <p class="text-xs md:text-sm text-gray-800 font-bold">${formatCurrency(product.price)}</p>
+                    <button class="add-to-cart-btn mt-2 bg-brand-blue text-white text-xs font-semibold py-1.5 px-3 md:py-2 md:px-4 rounded-full" data-id="${product.id}">
+                        Thêm vào giỏ
+                    </button>
+                </div>`;
+            
+            // Initial Load
+            onAuthStateChanged(auth, async (user) => {
+                isAdmin = false;
+                if (user) {
+                    const userDocRef = doc(db, 'checkid', user.uid);
+                    const docSnap = await getDoc(userDocRef);
+                    if(docSnap.exists() && docSnap.data().lon === 1) { isAdmin = true; }
+                }
+                updateAuthUI(user);
+                updateAdminUI();
+                await loadAllProducts();
+            });
+        });
+    </script>
+</body>
+</html>
+

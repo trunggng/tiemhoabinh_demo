@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu Chuyện Về Hòa Bình Jewelry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --brand-blue: #005f73;
+            --brand-gold: #c5b358;
+            --brand-light: #F7FAFC;
+        }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--brand-light);
+        }
+        .text-brand-blue { color: var(--brand-blue); }
+        .bg-brand-blue { background-color: var(--brand-blue); }
+        .border-brand-blue { border-color: var(--brand-blue); }
+        .text-brand-gold { color: var(--brand-gold); }
+        .border-brand-gold { border-color: var(--brand-gold); }
+        .bg-brand-gold { background-color: var(--brand-gold); }
+        .hover-nav:hover { color: var(--brand-gold); transition: color 0.3s ease; }
+        
+        /* Timeline styles */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            border: 4px solid var(--brand-gold);
+            top: 1rem;
+            left: -10px;
+            z-index: 1;
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-brand-light">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-2 border-b border-brand-blue/10 text-xs text-brand-blue">
+                <p>Hotline: <a href="tel:0943120069" class="hover-nav font-semibold">0943120069</a></p>
+                <p class="hidden md:block">Địa chỉ mới: 60 Bạch Vân, P.14, Q.5, TP.HCM</p>
+            </div>
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-3xl font-bold text-red-600 tracking-wider">HB</a>
+                <nav class="hidden lg:flex items-center space-x-8 text-brand-blue font-semibold">
+                    <a href="index.html" class="hover-nav">Trang Chủ</a>
+                    <a href="index.html#san-pham" class="hover-nav">Sản Phẩm</a>
+                    <a href="about.html" class="hover-nav text-brand-gold">Về chúng tôi</a>
+                    <a href="giavangbac.html" class="hover-nav">Giá Bạc</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                     <a href="index.html#cart-button" class="text-brand-blue hover-nav relative"><i data-lucide="shopping-cart" class="w-6 h-6"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-80 bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1513326197185-3382755e3831?q=80&w=1920&auto=format&fit=crop');">
+            <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center">
+                <div class="text-center text-white p-4">
+                    <h1 class="font-bold tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+                        Chợ Hòa Bình
+                    </h1>
+                    <p class="mt-4 text-lg md:text-xl max-w-2xl">Nguồn cảm hứng cho câu chuyện của chúng tôi</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-bold text-brand-blue">Hành Trình Gìn Giữ Nét Đẹp Kim Hoàn</h2>
+                        <p class="mt-4 text-lg text-gray-600">Mỗi chặng đường đi qua đều là một dấu son ghi lại nỗ lực và đam mê với nghề.</p>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="relative border-l-2 border-brand-gold ml-4 md:ml-0">
+                        <!-- Timeline Item 1: Inspiration -->
+                        <div class="timeline-item mb-16 ml-8 animate-on-scroll">
+                            <div class="absolute -left-12 mt-4 text-brand-gold">
+                                <i data-lucide="map-pin" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-brand-blue">Cội Nguồn Cảm Hứng</h3>
+                            <p class="text-md text-gray-500 mb-2">Chợ Hòa Bình, Quận 5</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Hành trình của chúng tôi bắt nguồn từ chính không khí tấp nập, nơi hội tụ tinh hoa và sự đa dạng của khu Chợ Hòa Bình, Quận 5. Nơi đây đã nuôi dưỡng niềm đam mê và khát khao tạo nên những sản phẩm kim hoàn không chỉ đẹp về mẫu mã mà còn chứa đựng giá trị văn hóa và câu chuyện riêng.
+                            </p>
+                        </div>
+                        
+                        <!-- Timeline Item 2: 2020 -->
+                        <div class="timeline-item mb-16 ml-8 animate-on-scroll">
+                             <div class="absolute -left-12 mt-4 text-brand-gold">
+                                <i data-lucide="gem" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-brand-blue">2020: Dấu Mốc Dịch Vụ Kim Hoàn</h3>
+                            <p class="text-md text-gray-500 mb-2">42 Chiêu Anh Các, P.5, Q.5</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Năm 2020, Hòa Bình chính thức đặt viên gạch đầu tiên với việc thành lập dịch vụ kim hoàn tại số 42 Chiêu Anh Các. Với tay nghề và sự tận tâm, chúng tôi nhanh chóng trở thành địa chỉ tin cậy cho khách hàng có nhu cầu sửa chữa, làm mới và chế tác trang sức theo yêu cầu.
+                            </p>
+                        </div>
+
+                        <!-- Timeline Item 3: 2025 -->
+                        <div class="timeline-item mb-16 ml-8 animate-on-scroll">
+                            <div class="absolute -left-12 mt-4 text-brand-gold">
+                                <i data-lucide="store" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-brand-blue">2025: Vươn Mình Phát Triển</h3>
+                             <p class="text-md text-gray-500 mb-2">Thành lập Tiệm Bạc & Dời Dịch Vụ</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Sau 5 năm xây dựng và phát triển, để đáp ứng sự tin yêu của quý khách hàng, chúng tôi tự hào ra mắt Tiệm Bạc Hòa Bình, chuyên cung cấp các sản phẩm trang sức bạc cao cấp. Đồng thời, để mở rộng quy mô và nâng cao chất lượng phục vụ, toàn bộ dịch vụ kim hoàn được dời về địa chỉ mới tại <strong class="text-brand-blue">60 Bạch Vân, Phường 14, Quận 5</strong>.
+                            </p>
+                        </div>
+                        
+                         <!-- Timeline Item 4: Future -->
+                        <div class="timeline-item ml-8 animate-on-scroll">
+                           <div class="absolute -left-12 mt-4 text-brand-gold">
+                                <i data-lucide="rocket" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-brand-blue">Tầm Nhìn Tương Lai</h3>
+                             <p class="text-md text-gray-500 mb-2">Tiếp tục hành trình sáng tạo</p>
+                            <p class="text-gray-700 leading-relaxed">
+                               Hòa Bình Jewelry sẽ không ngừng nỗ lực, sáng tạo để mang đến những sản phẩm và dịch vụ tốt nhất, xứng đáng là người bạn đồng hành trên hành trình làm đẹp của mỗi khách hàng.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visit Us Section -->
+        <section class="py-20 bg-brand-light">
+            <div class="container mx-auto px-4 text-center">
+                 <h2 class="text-3xl font-bold text-brand-blue">Ghé Thăm Chúng Tôi</h2>
+                 <p class="mt-4 text-lg text-gray-600 mb-8">Trải nghiệm dịch vụ và sản phẩm tại địa chỉ mới của Hòa Bình Jewelry.</p>
+                 <div class="max-w-4xl mx-auto rounded-lg overflow-hidden shadow-2xl">
+                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.673995899913!2d106.6573883152857!3d10.75971896240215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752eea39739563%3A0x443d34a6e8f4986b!2zNjAgQmFjaCBWxINuLCBQaMaw4budbmcgMTQsIFF14bqtbiA1LCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdG5hbQ!5e0!3m2!1svi!2s!4v1668581728863!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                 </div>
+                 <p class="mt-4 font-semibold text-brand-blue text-lg">60 Bạch Vân, Phường 14, Quận 5, TP.HCM</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-blue text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold text-brand-gold mb-4">HÒA BÌNH JEWELRY</h4>
+                    <p class="text-gray-300">Nơi vẻ đẹp và sự tinh tế được tôn vinh.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Chăm Sóc Khách Hàng</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-brand-gold">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#" class="hover:text-brand-gold">Chính sách đổi trả</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Thông Tin Liên Hệ</h4>
+                     <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start"><i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-1"></i>60 Bạch Vân, P.14, Q.5, TP.HCM</li>
+                        <li class="flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-2"></i>0943120069</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Đăng Ký Nhận Tin</h4>
+                    <div class="flex"><input type="email" placeholder="Email của bạn" class="w-full rounded-l-md p-2 text-gray-800 focus:outline-none"><button class="bg-brand-gold text-white font-semibold px-4 rounded-r-md">Đăng Ký</button></div>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 pt-6 text-center text-gray-400 text-sm"><p>&copy; 2025 Hòa Bình Jewelry. All rights reserved.</p></div>
+        </div>
+    </footer>
+    
+    <script>
+        lucide.createIcons();
+
+        // Simple scroll animation
+        const scrollElements = document.querySelectorAll('.animate-on-scroll');
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+        const displayScrollElement = (element) => {
+            element.classList.add('is-visible');
+        };
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                }
+            });
+        };
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+        handleScrollAnimation(); // Initial check
+    </script>
+</body>
+</html>
+
