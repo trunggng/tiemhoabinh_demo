@@ -53,6 +53,17 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .newly-loaded { animation: slideUp 0.6s ease-out forwards; }
+        
+        #chat-messages {
+            scrollbar-width: thin;
+            scrollbar-color: var(--brand-gold) var(--brand-light);
+        }
+        #chat-messages::-webkit-scrollbar { width: 6px; }
+        #chat-messages::-webkit-scrollbar-track { background: var(--brand-light); }
+        #chat-messages::-webkit-scrollbar-thumb {
+            background-color: var(--brand-gold);
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body class="bg-brand-light">
@@ -69,36 +80,36 @@
                 <nav class="hidden lg:flex items-center space-x-8 text-brand-blue font-semibold">
                     <div class="relative group">
                         <button class="hover-nav flex items-center">Trang Sức<i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i></button>
-                        <div class="megamenu absolute top-full left-1/2 -translate-x-1/2 w-screen max-w-4xl bg-white shadow-lg rounded-b-lg p-8 z-20">
+                        <div class="megamenu absolute top-full left-1/2 -translate-x-1/2 w-max max-w-4xl bg-white shadow-lg rounded-b-lg p-8 z-20">
                            <div class="grid grid-cols-4 gap-8">
+                                 <div class="space-y-4">
+                                     <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Nữ</h3>
+                                     <ul class="space-y-2">
+                                         <li><a href="a.html" class="text-sm text-gray-600 hover:text-brand-gold">Dây chuyền</a></li>
+                                         <li><a href="a.html" class="text-sm text-gray-600 hover:text-brand-gold">Nhẫn</a></li>
+                                         <li><a href="a.html" class="text-sm text-gray-600 hover:text-brand-gold">Bông tai</a></li>
+                                         <li><a href="a.html" class="text-sm text-gray-600 hover:text-brand-gold">Lắc & Vòng tay</a></li>
+                                     </ul>
+                                 </div>
+                                 <div class="space-y-4">
+                                      <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Nam</h3>
+                                     <ul class="space-y-2">
+                                         <li><a href="a.html" class="text-sm text-gray-600 hover:text-brand-gold">Dây chuyền</a></li>
+                                         <li><a href="a.html" class="text-sm text-gray-600 hover:text-brand-gold">Nhẫn</a></li>
+                                     </ul>
+                                 </div>
                                 <div class="space-y-4">
-                                    <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Nữ</h3>
-                                    <ul class="space-y-2">
-                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Dây chuyền</a></li>
-                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Nhẫn</a></li>
-                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Bông tai</a></li>
-                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Lắc & Vòng tay</a></li>
-                                    </ul>
-                                </div>
-                                <div class="space-y-4">
-                                     <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Nam</h3>
-                                    <ul class="space-y-2">
-                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Dây chuyền</a></li>
-                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Nhẫn</a></li>
-                                    </ul>
-                                </div>
-                               <div class="space-y-4">
-                                     <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Trẻ Em</h3>
-                                    <ul class="space-y-2">
-                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Bông tai</a></li>
-                                        <li><a href="#" class="text-sm text-gray-600 hover:text-brand-gold">Lắc tay & Lắc chân</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-span-1">
-                                    <a href="#" class="block rounded-lg overflow-hidden group/img">
-                                        <img src="https://placehold.co/400x400/005f73/ffffff?text=BST+Mới" alt="New Collection" class="w-full h-full object-cover transition-transform duration-300 group-hover/img:scale-105">
-                                    </a>
-                                </div>
+                                      <h3 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-2">Trang Sức Trẻ Em</h3>
+                                     <ul class="space-y-2">
+                                         <li><a href="a.html" class="text-sm text-gray-600 hover:text-brand-gold">Bông tai</a></li>
+                                         <li><a href="a.html" class="text-sm text-gray-600 hover:text-brand-gold">Lắc tay & Lắc chân</a></li>
+                                     </ul>
+                                 </div>
+                                 <div class="col-span-1">
+                                     <a href="#" class="block rounded-lg overflow-hidden group/img">
+                                         <img src="https://placehold.co/400x400/005f73/ffffff?text=BST+Mới" alt="New Collection" class="w-full h-full object-cover transition-transform duration-300 group-hover/img:scale-105">
+                                     </a>
+                                 </div>
                            </div>
                         </div>
                     </div>
@@ -109,10 +120,10 @@
                 
                 <div class="flex items-center space-x-4">
                     <div class="relative">
-                        <input type="text" id="search-input" placeholder="Tìm kiếm..." class="border bg-gray-100 border-gray-300 rounded-full py-1.5 px-4 w-48 focus:outline-none focus:border-brand-gold text-sm text-gray-800 placeholder-gray-500 transition-all duration-300 focus:w-56">
+                        <input type="text" id="search-input" placeholder="Tìm kiếm..." class="border bg-gray-100 border-gray-300 rounded-full py-1.5 px-4 w-32 md:w-48 focus:outline-none focus:border-brand-gold text-sm text-gray-800 placeholder-gray-500 transition-all duration-300 focus:w-40 md:focus:w-56">
                         <i data-lucide="search" class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
                     </div>
-                    <div id="auth-section" class="flex items-center space-x-2 text-sm">
+                    <div id="auth-section" class="hidden lg:flex items-center space-x-2 text-sm">
                         <button id="login-trigger-btn" class="text-brand-blue hover-nav font-semibold">Đăng nhập</button>
                         <span class="text-gray-400">|</span>
                         <button id="register-trigger-btn" class="text-brand-blue hover-nav font-semibold">Đăng ký</button>
@@ -124,6 +135,48 @@
         </div>
     </header>
 
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden fixed top-0 left-0 w-full h-full bg-white z-[60] p-6 pt-20 flex flex-col">
+        <div class="overflow-y-auto">
+            <nav class="flex flex-col space-y-4 text-brand-blue font-semibold text-lg">
+                <details>
+                    <summary class="flex justify-between items-center cursor-pointer py-2 border-b">
+                        <span>Trang Sức</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
+                    </summary>
+                    <div class="pl-4 mt-2 space-y-2 text-gray-600 font-medium">
+                        <h4 class="font-bold text-brand-blue mt-2">Trang Sức Nữ</h4>
+                        <ul class="space-y-1 pl-2">
+                            <li><a href="a.html" class="block py-1 hover:text-brand-gold">Dây chuyền</a></li>
+                            <li><a href="a.html" class="block py-1 hover:text-brand-gold">Nhẫn</a></li>
+                            <li><a href="a.html" class="block py-1 hover:text-brand-gold">Bông tai</a></li>
+                            <li><a href="a.html" class="block py-1 hover:text-brand-gold">Lắc & Vòng tay</a></li>
+                        </ul>
+                        <h4 class="font-bold text-brand-blue mt-2">Trang Sức Nam</h4>
+                        <ul class="space-y-1 pl-2">
+                            <li><a href="a.html#" class="block py-1 hover:text-brand-gold">Dây chuyền</a></li>
+                            <li><a href="a.html" class="block py-1 hover:text-brand-gold">Nhẫn</a></li>
+                        </ul>
+                        <h4 class="font-bold text-brand-blue mt-2">Trang Sức Trẻ Em</h4>
+                        <ul class="space-y-1 pl-2">
+                            <li><a href="a.html" class="block py-1 hover:text-brand-gold">Bông tai</a></li>
+                            <li><a href="a.html" class="block py-1 hover:text-brand-gold">Lắc tay & Lắc chân</a></li>
+                        </ul>
+                    </div>
+                    <style>
+                        details[open] summary svg { transform: rotate(180deg); }
+                    </style>
+                </details>
+                <a href="#bo-suu-tap" class="block py-2 border-b hover:text-brand-gold">Bộ Sưu Tập</a>
+                <a href="vechungtoi.html" class="block py-2 border-b hover:text-brand-gold">Về chúng tôi</a>
+                <a href="giavangbac.html" class="block py-2 border-b hover:text-brand-gold">Giá Bạc</a>
+            </nav>
+            <div id="mobile-auth-section" class="mt-8 pt-4 border-t">
+                 <!-- Mobile auth buttons will be dynamically rendered here by JS -->
+            </div>
+        </div>
+    </div>
+
     <main>
         <!-- Hero Section -->
         <section id="hero-carousel" class="relative w-full h-[60vh] md:h-[85vh] overflow-hidden">
@@ -131,7 +184,7 @@
                 <div class="hero-slide active">
                     <img src="https://placehold.co/1920x1080/cccccc/969696?text=Loading..." alt="Dấu Ấn Tối Giản" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/30 flex items-center justify-center p-4">
-                        <div class="bg-white/10 backdrop-blur-sm p-8 md:p-12 rounded-lg text-center text-white max-w-3xl">
+                        <div class="text-center text-white max-w-2xl">
                              <h1 class="text-4xl md:text-6xl font-bold" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">BST Dấu Ấn Tối Giản</h1>
                             <p class="mt-4 text-lg md:text-xl">Vẻ đẹp trong sự tinh tế, thanh lịch và hiện đại.</p>
                             <a href="#san-pham" class="mt-8 inline-block bg-white text-brand-blue font-semibold py-3 px-8 rounded-full hover:bg-opacity-90 transition-transform hover:scale-105">Mua Ngay</a>
@@ -141,7 +194,7 @@
                 <div class="hero-slide">
                     <img src="https://placehold.co/1920x1080/cccccc/969696?text=Loading..." alt="Giai Điệu Tình Yêu" class="w-full h-full object-cover">
                      <div class="absolute inset-0 bg-black/20 flex items-center justify-center p-4">
-                        <div class="bg-white/10 backdrop-blur-sm p-8 md:p-12 rounded-lg text-center text-white max-w-3xl">
+                        <div class="text-center text-white max-w-2xl">
                             <h1 class="text-4xl md:text-6xl font-bold" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">BST Giai Điệu Tình Yêu</h1>
                             <p class="mt-4 text-lg md:text-xl">Gửi gắm yêu thương qua những món quà tinh tế.</p>
                             <a href="#san-pham" class="mt-8 inline-block bg-white text-brand-blue font-semibold py-3 px-8 rounded-full hover:bg-opacity-90 transition-transform hover:scale-105">Xem Ngay</a>
@@ -151,7 +204,7 @@
                 <div class="hero-slide">
                     <img src="https://placehold.co/1920x1080/cccccc/969696?text=Loading..." alt="Nét Chạm Hoàng Kim" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/30 flex items-center justify-center p-4">
-                         <div class="bg-black/20 backdrop-blur-sm p-8 md:p-12 rounded-lg text-center text-white max-w-3xl">
+                         <div class="text-center text-white max-w-2xl">
                             <h1 class="text-4xl md:text-6xl font-bold text-brand-gold" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">BST Nét Chạm Hoàng Kim</h1>
                             <p class="mt-4 text-lg md:text-xl">Sự kết hợp hoàn hảo giữa bạc và chi tiết mạ vàng.</p>
                             <a href="#san-pham" class="mt-8 inline-block bg-brand-gold text-white font-semibold py-3 px-8 rounded-full hover:bg-opacity-90 transition-transform hover:scale-105">Khám Phá</a>
@@ -163,17 +216,26 @@
         </section>
 
         <!-- Brand Promise Section -->
-        <section class="bg-white">
-            <div class="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="flex items-center justify-center p-4"><i data-lucide="truck" class="w-10 h-10 text-brand-blue mr-4"></i><div><h3 class="font-bold text-brand-blue">Giao Hàng Toàn Quốc</h3></div></div>
-                <div class="flex items-center justify-center p-4"><i data-lucide="heart-handshake" class="w-10 h-10 text-brand-blue mr-4"></i><div><h3 class="font-bold text-brand-blue">Dịch Vụ Tận Tâm</h3></div></div>
-                <div class="flex items-center justify-center p-4"><i data-lucide="gem" class="w-10 h-10 text-brand-blue mr-4"></i><div><h3 class="font-bold text-brand-blue">Chất Lượng Cao</h3></div></div>
+        <section class="bg-gray-100">
+            <div class="container mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-8">
+                <div class="flex items-center justify-center p-2">
+                    <i data-lucide="truck" class="w-9 h-9 text-brand-blue mr-3 flex-shrink-0"></i>
+                    <h3 class="font-semibold text-brand-blue text-sm sm:text-base">Giao Hàng Toàn Quốc</h3>
+                </div>
+                <div class="flex items-center justify-center p-2">
+                    <i data-lucide="heart-handshake" class="w-9 h-9 text-brand-blue mr-3 flex-shrink-0"></i>
+                    <h3 class="font-semibold text-brand-blue text-sm sm:text-base">Dịch Vụ Tận Tâm</h3>
+                </div>
+                <div class="flex items-center justify-center p-2">
+                    <i data-lucide="gem" class="w-9 h-9 text-brand-blue mr-3 flex-shrink-0"></i>
+                    <h3 class="font-semibold text-brand-blue text-sm sm:text-base">Chất Lượng Cao</h3>
+                </div>
             </div>
         </section>
         
         <!-- Category Tags -->
         <section class="bg-brand-light py-4 border-b sticky top-[76px] z-40 backdrop-blur-sm bg-opacity-80">
-            <div id="category-filter-bar" class="container mx-auto px-4 flex justify-center items-center space-x-2 md:space-x-4">
+            <div id="category-filter-bar" class="container mx-auto px-4 flex justify-start md:justify-center items-center space-x-2 md:space-x-4 overflow-x-auto whitespace-nowrap pb-2">
                 <button data-category="all" class="category-tag active text-sm md:text-base font-semibold border-2 border-gray-300 rounded-full px-4 py-1.5 hover:bg-brand-blue hover:text-white hover:border-brand-blue">Tất cả</button>
                 <button data-category="nu" class="category-tag text-sm md:text-base font-semibold border-2 border-gray-300 rounded-full px-4 py-1.5 hover:bg-brand-blue hover:text-white hover:border-brand-blue">Nữ</button>
                 <button data-category="nam" class="category-tag text-sm md:text-base font-semibold border-2 border-gray-300 rounded-full px-4 py-1.5 hover:bg-brand-blue hover:text-white hover:border-brand-blue">Nam</button>
@@ -205,14 +267,14 @@
         <section id="bo-suu-tap" class="py-20 bg-white">
              <div class="container mx-auto px-4">
                  <div class="grid md:grid-cols-2 gap-12 items-center">
-                       <div class="order-2 md:order-1 text-center md:text-left">
-                           <h3 class="text-3xl font-bold text-brand-blue">BST "Vũ Khúc Đại Dương"</h3>
-                           <p class="mt-4 text-gray-600 leading-relaxed max-w-md mx-auto md:mx-0">Lấy cảm hứng từ vẻ đẹp của đại dương xanh thẳm, bộ sưu tập "Vũ Khúc Đại Dương" là sự kết hợp hài hòa giữa bạc 925 cao cấp và những đường nét thiết kế mềm mại, uyển chuyển.</p>
-                           <a href="#" class="inline-block mt-8 bg-brand-blue text-white font-semibold py-3 px-8 rounded-full hover:bg-opacity-90 transition-transform hover:scale-105">Khám Phá Ngay</a>
-                       </div>
-                       <div class="order-1 md:order-2">
-                           <img src="https://file.hstatic.net/1000381168/collection/1920x820px_335c4cac831e45a7987edb70cca165f5.jpg" alt="Collection" class="w-full h-auto rounded-lg shadow-xl">
-                       </div>
+                      <div class="order-2 md:order-1 text-center md:text-left">
+                          <h3 class="text-3xl font-bold text-brand-blue">BST "Vũ Khúc Đại Dương"</h3>
+                          <p class="mt-4 text-gray-600 leading-relaxed max-w-md mx-auto md:mx-0">Lấy cảm hứng từ vẻ đẹp của đại dương xanh thẳm, bộ sưu tập "Vũ Khúc Đại Dương" là sự kết hợp hài hòa giữa bạc 925 cao cấp và những đường nét thiết kế mềm mại, uyển chuyển.</p>
+                          <a href="#" class="inline-block mt-8 bg-brand-blue text-white font-semibold py-3 px-8 rounded-full hover:bg-opacity-90 transition-transform hover:scale-105">Khám Phá Ngay</a>
+                      </div>
+                      <div class="order-1 md:order-2">
+                          <img src="https://file.hstatic.net/1000381168/collection/1920x820px_335c4cac831e45a7987edb70cca165f5.jpg" alt="Collection" class="w-full h-auto rounded-lg shadow-xl">
+                      </div>
                  </div>
             </div>
         </section>
@@ -277,8 +339,8 @@
                 <div>
                     <h4 class="font-semibold text-lg mb-4">Thông Tin Liên Hệ</h4>
                      <ul class="space-y-2 text-gray-300">
-                        <li class="flex items-start"><i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-1"></i>42 Chiêu Anh Các, P5, Q5, TPHCM</li>
-                        <li class="flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-2"></i>0943120069</li>
+                         <li class="flex items-start"><i data-lucide="map-pin" class="w-4 h-4 mr-2 mt-1"></i>42 Chiêu Anh Các, P5, Q5, TPHCM</li>
+                         <li class="flex items-center"><i data-lucide="phone" class="w-4 h-4 mr-2"></i>0943120069</li>
                     </ul>
                 </div>
                 <div>
@@ -357,6 +419,40 @@
         </div>
     </div>
 
+    <!-- AI Chat Button -->
+    <button id="ai-chat-button" class="fixed bottom-6 right-6 bg-brand-gold text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center z-50 hover:bg-brand-blue transition-transform transform hover:scale-110">
+        <i data-lucide="sparkles" class="w-8 h-8"></i>
+    </button>
+
+    <!-- AI Chat Modal -->
+    <div id="ai-chat-modal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[101] hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg h-[80vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h2 class="text-xl font-bold text-brand-blue flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-brand-gold"></i>
+                    Tư Vấn Trang Sức AI
+                </h2>
+                <button id="close-chat-modal-btn" class="text-gray-500 hover:text-gray-800"><i data-lucide="x" class="w-6 h-6 pointer-events-none"></i></button>
+            </div>
+            <div id="chat-messages" class="flex-grow p-4 overflow-y-auto space-y-4">
+                <!-- Initial AI message -->
+                <div class="flex justify-start">
+                    <div class="bg-gray-100 text-gray-800 rounded-lg p-3 max-w-xs">
+                        <p>Xin chào! Tôi có thể giúp bạn chọn trang sức cho dịp nào hoặc phối với trang phục gì không?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t bg-gray-50">
+                <form id="chat-form" class="flex items-center gap-2">
+                    <input type="text" id="chat-input" placeholder="Nhập yêu cầu của bạn..." class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-brand-gold" required autocomplete="off">
+                    <button type="submit" class="bg-brand-blue text-white rounded-full p-3 hover:bg-brand-gold transition-colors">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
@@ -414,6 +510,15 @@
             const registerForm = document.getElementById('register-form');
             const checkoutButton = document.getElementById('checkout-button');
             const confirmDeleteModal = document.getElementById('confirm-delete-modal');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileAuthSection = document.getElementById('mobile-auth-section');
+            const aiChatButton = document.getElementById('ai-chat-button');
+            const aiChatModal = document.getElementById('ai-chat-modal');
+            const closeChatModalBtn = document.getElementById('close-chat-modal-btn');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            const chatMessages = document.getElementById('chat-messages');
 
             const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 
@@ -591,21 +696,46 @@
             };
             
             // --- Authentication ---
+            let heroImagesLoaded = false;
             onAuthStateChanged(auth, async (user) => {
+                if (!heroImagesLoaded) {
+                    loadHeroImages();
+                    heroImagesLoaded = true;
+                }
+
                 if (user) {
                     const userDocRef = doc(db, 'checkid', user.uid);
                     const docSnap = await getDoc(userDocRef);
                     isAdmin = docSnap.exists() && docSnap.data().lon === 1;
+
+                    // Desktop Auth UI
                     authSection.innerHTML = `<div class="flex items-center space-x-2"><span class="font-semibold text-sm text-brand-blue">${isAdmin ? '<i data-lucide="shield-check" class="inline-block text-yellow-500 w-4 h-4"></i> ' : ''} ${user.email}</span><button id="logout-button" class="text-xs bg-red-500 text-white py-1 px-2 rounded">Đăng xuất</button></div>`;
                     document.getElementById('logout-button').addEventListener('click', () => signOut(auth));
+                    
+                    // Mobile Auth UI
+                    mobileAuthSection.innerHTML = `<div class="text-center"><p class="font-semibold text-brand-blue mb-3">${isAdmin ? '<i data-lucide="shield-check" class="inline-block text-yellow-500 w-4 h-4"></i> ' : ''} ${user.email}</p><button id="mobile-logout-button" class="w-full bg-red-500 text-white font-bold py-2 rounded-md">Đăng xuất</button></div>`;
+                    document.getElementById('mobile-logout-button').addEventListener('click', () => signOut(auth));
+
                     [loginModal, registerModal].forEach(m => m.classList.add('hidden'));
                     const loginPrompt = document.getElementById('login-prompt-message');
                     if (loginPrompt) loginPrompt.textContent = '';
                 } else {
                     isAdmin = false;
+                    // Desktop Auth UI
                     authSection.innerHTML = `<button id="login-trigger-btn" class="font-semibold text-brand-blue hover-nav">Đăng nhập</button><span class="text-gray-400">|</span><button id="register-trigger-btn" class="font-semibold text-brand-blue hover-nav">Đăng ký</button>`;
                     document.getElementById('login-trigger-btn')?.addEventListener('click', () => loginModal.classList.remove('hidden'));
                     document.getElementById('register-trigger-btn')?.addEventListener('click', () => registerModal.classList.remove('hidden'));
+                    
+                    // Mobile Auth UI
+                    mobileAuthSection.innerHTML = `<button id="mobile-login-trigger" class="w-full text-center bg-brand-blue text-white font-semibold py-3 px-6 rounded-full">Đăng nhập</button><button id="mobile-register-trigger" class="w-full text-center text-brand-blue font-semibold py-3 px-6 mt-3">Đăng ký</button>`;
+                    document.getElementById('mobile-login-trigger')?.addEventListener('click', () => {
+                        loginModal.classList.remove('hidden');
+                        mobileMenu.classList.add('hidden');
+                    });
+                    document.getElementById('mobile-register-trigger')?.addEventListener('click', () => {
+                        registerModal.classList.remove('hidden');
+                        mobileMenu.classList.add('hidden');
+                    });
                 }
                 lucide.createIcons();
                 updateAdminUI(); 
@@ -771,6 +901,27 @@
                 cartOverlay.classList.add('hidden');
             });
 
+            // --- Mobile Menu Toggle ---
+            if (mobileMenuButton && mobileMenu) {
+                const toggleMenu = (forceClose = false) => {
+                    const icon = mobileMenuButton.querySelector('i');
+                    if (forceClose || !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        icon.setAttribute('data-lucide', 'menu');
+                    } else {
+                        mobileMenu.classList.remove('hidden');
+                        icon.setAttribute('data-lucide', 'x');
+                    }
+                    lucide.createIcons();
+                };
+
+                mobileMenuButton.addEventListener('click', () => toggleMenu());
+                
+                mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+                    link.addEventListener('click', () => toggleMenu(true));
+                });
+            }
+
 
             const createProductCardHTML = (product) => `
                 <div class="product-card group text-center relative bg-white rounded-lg shadow-sm overflow-hidden" data-id="${product.id}">
@@ -788,11 +939,115 @@
                         </button>
                     </div>
                 </div>`;
+            
+            // --- AI Chat Logic ---
+            aiChatButton?.addEventListener('click', () => {
+                aiChatModal.classList.remove('hidden');
+                lucide.createIcons();
+            });
+
+            closeChatModalBtn?.addEventListener('click', () => {
+                aiChatModal.classList.add('hidden');
+            });
+
+            chatForm?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userMessage = chatInput.value.trim();
+                if (userMessage) {
+                    appendMessage(userMessage, 'user');
+                    chatInput.value = '';
+                    callGeminiAPI(userMessage);
+                }
+            });
+
+            const appendMessage = (message, sender) => {
+                const messageWrapper = document.createElement('div');
+                const messageBubble = document.createElement('div');
+                
+                messageWrapper.classList.add('flex');
+                messageBubble.innerHTML = `<p>${message}</p>`;
+                
+                if (sender === 'user') {
+                    messageWrapper.classList.add('justify-end');
+                    messageBubble.classList.add('bg-brand-blue', 'text-white', 'rounded-lg', 'p-3', 'max-w-xs', 'md:max-w-md');
+                } else {
+                    messageWrapper.classList.add('justify-start');
+                    messageBubble.classList.add('bg-gray-100', 'text-gray-800', 'rounded-lg', 'p-3', 'max-w-xs', 'md:max-w-md');
+                }
+                
+                messageWrapper.appendChild(messageBubble);
+                chatMessages.appendChild(messageWrapper);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
+
+            const showLoadingIndicator = () => {
+                const loadingBubble = `
+                    <div class="flex justify-start" id="loading-indicator">
+                        <div class="bg-gray-100 text-gray-800 rounded-lg p-3 max-w-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-brand-gold rounded-full animate-pulse"></div>
+                                <div class="w-2 h-2 bg-brand-gold rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                                <div class="w-2 h-2 bg-brand-gold rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                chatMessages.insertAdjacentHTML('beforeend', loadingBubble);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
+
+            const hideLoadingIndicator = () => {
+                const indicator = document.getElementById('loading-indicator');
+                if (indicator) {
+                    indicator.remove();
+                }
+            };
+
+            const callGeminiAPI = async (userQuery) => {
+                showLoadingIndicator();
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                const productList = allProducts.map(p => `- ${p.name}`).join('\n');
+                const systemPrompt = `Bạn là một chuyên gia tư vấn trang sức AI cho cửa hàng Hòa Bình Jewelry. Nhiệm vụ của bạn là đọc yêu cầu của khách hàng và gợi ý những sản phẩm phù hợp nhất từ danh sách sản phẩm được cung cấp. QUY TẮC: 1. Chỉ được gợi ý sản phẩm có trong "DANH SÁCH SẢN PHẨM". 2. Đưa ra 2-3 gợi ý phù hợp nhất. 3. Với mỗi gợi ý, giải thích ngắn gọn tại sao nó phù hợp với yêu cầu của khách. 4. Trả lời bằng tiếng Việt, giọng điệu thân thiện, chuyên nghiệp. 5. Định dạng câu trả lời rõ ràng, dễ đọc. Không cần cảm ơn. Bắt đầu thẳng vào phần gợi ý.`;
+                const fullPrompt = `DANH SÁCH SẢN PHẨM:\n${productList}\n\nYÊU CẦU CỦA KHÁCH HÀNG:\n"${userQuery}"`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: fullPrompt }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API error: ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+                    let aiResponse = "Xin lỗi, tôi chưa thể đưa ra gợi ý lúc này. Vui lòng thử lại sau.";
+
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        aiResponse = candidate.content.parts[0].text;
+                        aiResponse = aiResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/^- (.*)/gm, '<li>$1</li>').replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+                    }
+                    appendMessage(aiResponse, 'ai');
+                } catch (error) {
+                    console.error("Error calling Gemini API:", error);
+                    appendMessage("Rất tiếc, đã có lỗi xảy ra. Vui lòng thử lại sau.", 'ai');
+                } finally {
+                    hideLoadingIndicator();
+                }
+            };
+
 
             // Initial Load
             loadCart();
             loadAndCombineProducts();
-            loadHeroImages();
         });
     </script>
 </body>
